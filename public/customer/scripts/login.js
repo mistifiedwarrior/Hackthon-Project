@@ -10,21 +10,21 @@ const getOptions = function (body, method = 'POST') {
 };
 
 const clearInputs = function () {
-  getElement('#username').value = '';
+  getElement('#email').value = '';
   getElement('#password').value = '';
 };
 
 const getFormDetails = function () {
-  const username = getElement('#username').value;
+  const email = getElement('#email').value;
   const password = getElement('#password').value;
-  return { username, password };
+  return { email, password };
 };
 
 const showMessage = function (status) {
   const $status = getElement('.status');
   const text = 'Credentials not matched';
   if (status) {
-    window.location.href = 'customer/dashboard.html';
+    window.location.href = 'dashboard.html';
     return;
   }
   $status.innerText = text;

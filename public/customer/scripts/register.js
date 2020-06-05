@@ -10,7 +10,6 @@ const getOptions = function (body, method = 'POST') {
 };
 
 const clearInputs = function () {
-  getElement('#username').value = '';
   getElement('#name').value = '';
   getElement('#email').value = '';
   getElement('#password').value = '';

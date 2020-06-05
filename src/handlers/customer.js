@@ -5,11 +5,11 @@ const registerCustomer = async (req, res) => {
     const customer = req.body;
     const registered = await Customer.findOne({ email: customer.email });
     if (registered !== null) {
-      res.status(404).send({ error: 'Email already registered' });
+      return res.status(404).send({ error: 'Email already registered' });
     }
     customer.registeredDate = new Date();
     await new Customer(customer).save();
-    res.status(201).end();
+    res.status(201).send({});
   } catch (error) {
     res.status(500).end();
   }
