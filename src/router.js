@@ -1,6 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-// require('./db/connectDB');
+require('./db/connectDB');
 
 const { customerRouter } = require('./routers/customer');
 

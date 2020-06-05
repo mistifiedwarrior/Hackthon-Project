@@ -61,11 +61,12 @@
     "space-infix-ops": "error",
     "no-multi-spaces": "error",
     "semi-spacing": "error",
-    "no-multiple-empty-lines": ["error", { "max": 1 }]
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "no-useless-catch": "warn"
   },
   "overrides": [
     {
-      "files": ["test/*.js"],
+      "files": ["tests/*.js"],
       "rules": {
         "max-len": "warn",
         "no-magic-numbers": "off",
@@ -73,12 +74,17 @@
       }
     },
     {
-      "files": ["server.js", "connectDB.js"],
+      "files": [
+        "server.js",
+        "connectDB.js",
+        "src/models/*.js",
+        "test/fixture/*.js"
+      ],
       "rules": { "no-process-env": "off" }
     },
     {
-      "files": ["models/*.js"],
-      "rules": { "no-process-env": "off" }
+      "files": ["src/handlers/*.js"],
+      "rules": { "no-magic-numbers": "off" }
     },
     { "files": ["server.js"], "rules": { "no-console": "off" } }
   ]

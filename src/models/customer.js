@@ -31,7 +31,8 @@ customerSchema.methods.generateAuthToken = async function () {
 customerSchema.pre('save', async function (next) {
   const customer = this;
   if (customer.isModified('password')) {
-    customer.password = await bcrypt.hash(customer.password, 8);
+    const hashTime = 8;
+    customer.password = await bcrypt.hash(customer.password, hashTime);
   }
   next();
 });

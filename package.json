@@ -6,9 +6,13 @@
   "directories": {
     "test": "test"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true
+  },
   "scripts": {
     "start": "node server.js",
-    "test": "env-cmd ./config/test.env nyc mocha",
+    "test": "env-cmd ./config/test.env jest --runInBand --detectOpenHandles --coverage --forceExit",
     "dev": "env-cmd ./config/dev.env nodemon server.js"
   },
   "repository": {
@@ -35,9 +39,8 @@
     "chai": "^4.2.0",
     "env-cmd": "^8.0.2",
     "eslint": "^7.1.0",
-    "mocha": "^7.2.0",
+    "jest": "^26.0.1",
     "nodemon": "^2.0.4",
-    "nyc": "^15.1.0",
     "sinon": "^9.0.2",
     "supertest": "^4.0.2"
   }
