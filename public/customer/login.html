@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <title>Go2Shop</title>
+  </head>
+  <body>
+    <div class="center-container">
+      <div class="title">Go2Shop | Customer</div>
+      <div class="card-container">
+        <div class="card-title">Login</div>
+        <div class="status error-status"></div>
+        <form id="login-form">
+          <div class="error"></div>
+          <div class="input">
+            <label> Username : <span class="required">*</span></label>
+            <input type="text" id="username" required />
+          </div>
+          <div class="input">
+            <label> Password : <span class="required">*</span></label>
+            <input type="password" id="password" required />
+          </div>
+          <div class="submit">
+            <input type="submit" value="Login" class="btn none-pointer" />
+          </div>
+        </form>
+        <div class="sibling-page">
+          * New Customer <a href="./register.html">Register</a>
+        </div>
+      </div>
+      <div class="back-link">
+        <a href="/">Back to Go2Shop</a>
+      </div>
+    </div>
+  </body>
+</html>

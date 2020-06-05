@@ -65,12 +65,17 @@
   },
   "overrides": [
     {
-      "files": ["test*.js"],
+      "files": ["test/*.js"],
       "rules": {
         "max-len": "warn",
         "no-magic-numbers": "off",
         "max-statements": "off"
       }
-    }
+    },
+    {
+      "files": ["server.js", "connectDB.js"],
+      "rules": { "no-process-env": "off" }
+    },
+    { "files": ["server.js"], "rules": { "no-console": "off" } }
   ]
 }

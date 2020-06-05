@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: sans-serif;
+}
+.center-container {
+  position: absolute;
+  top: 16vh;
+  left: 35vw;
+  width: 28vw;
+}
+.title {
+  font-size: 32px;
+  margin-bottom: 4%;
+}
+.card-container {
+  border: 1px solid #7aa0d2;
+  margin: 2% 0;
+  padding: 2%;
+  background-color: #eee;
+  box-shadow: 0 0 16px #0c4da2;
+}
+.card-title {
+  text-align: center;
+  font-size: 24px;
+}
+.status {
+  padding: 2%;
+  padding-bottom: 0;
+  font-size: 20px;
+  color: green;
+  font-weight: 600;
+}
+.error-status {
+  color: red;
+}
+form {
+  font-weight: 400;
+}
+.input {
+  width: 90%;
+  margin: 4%;
+}
+form label {
+  font-size: 18px;
+  color: #333;
+}
+.required {
+  color: #f00;
+}
+form input {
+  font-size: 18px;
+  background-color: #fff;
+  padding: 1%;
+  outline: 0;
+  margin-top: 1%;
+  width: 100%;
+}
+#username-availability {
+  padding: 2%;
+  padding-bottom: 0;
+  font-size: 14px;
+  color: green;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  width: 92%;
+  margin: 4%;
+}
+.submit > .btn {
+  padding: 3%;
+  width: 50%;
+  background-color: #0c4da2;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: ease-in background-color 0.2s;
+}
+.submit > .btn:hover {
+  background-color: #032081;
+}
+.error {
+  padding: 2%;
+  padding-bottom: 0;
+  font-size: 14px;
+  color: red;
+}
+.sibling-page {
+  margin-left: 4%;
+}
+.sibling-page a {
+  color: #0c4da2;
+}
+.sibling-page a:hover {
+  color: #032081;
+}
+.back-link {
+  margin: 4%;
+  text-align: center;
+}
+.back-link a {
+  color: #0c4da2;
+  text-decoration: none;
+}
+.back-link a::before {
+  content: '\2190';
+}
+.back-link a:hover {
+  color: #032081;
+}
+
+.submit > .none-pointer {
+  pointer-events: none;
+  background-color: #7aa0d2;
+}
+.hidden {
+  display: none;
+}

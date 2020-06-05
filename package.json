@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "nyc mocha"
+    "start": "node server.js",
+    "test": "env-cmd ./config/test.env nyc mocha",
+    "dev": "env-cmd ./config/dev.env nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -24,11 +26,13 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
-    "moment": "^2.26.0"
+    "moment": "^2.26.0",
+    "mongodb": "^3.5.8",
+    "mongoose": "^5.9.17"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "env-cmd": "^10.1.0",
+    "env-cmd": "^8.0.2",
     "eslint": "^7.1.0",
     "mocha": "^7.2.0",
     "nodemon": "^2.0.4",
