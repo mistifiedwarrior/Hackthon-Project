@@ -86,6 +86,14 @@
       "files": ["src/handlers/*.js"],
       "rules": { "no-magic-numbers": "off" }
     },
-    { "files": ["server.js"], "rules": { "no-console": "off" } }
+    { "files": ["server.js"], "rules": { "no-console": "off" } },
+    {
+      "files": ["public/*/*/*.js", "public/*/*/*/*.js"],
+      "rules": {
+        "no-magic-numbers": "off",
+        "no-undef": "off",
+        "no-unused-vars": "off"
+      }
+    }
   ]
 }
