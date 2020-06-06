@@ -1,3 +1,4 @@
+<div class="site-logo">Go2Shop | Shopkeeper</div>
 <div class="menu-bar menu-wrapper" id="top-menu">
   <label for="mobile-menu-toggle">
     <a class="mobile-menu icon"><i class="fa fa-bars"></i></a>
@@ -7,11 +8,29 @@
     <li class="desktop-menu">
       <a href="/" class="icon"><i class="fa fa-home"></i></a>
     </li>
-    <li><a href="/">Home</a></li>
+    <li><a href="dashboard.html">Home</a></li>
   </ul>
 </div>
 
 <style>
+  .site-logo {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100px;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+    color: #0c4da2;
+    padding-left: 2%;
+  }
+  @media (max-width: 420px) {
+    .site-logo {
+      font-size: 24px;
+      line-height: 28px;
+    }
+  }
+
   .mobile-menu,
   input[type='checkbox'] {
     display: none;
