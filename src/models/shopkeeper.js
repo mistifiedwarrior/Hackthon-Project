@@ -20,6 +20,11 @@ const shopkeeperSchema = new mongoose.Schema({
     name: { type: String, trim: true },
     description: { type: String, trim: true },
   },
+  openingTime: { type: String },
+  closingTime: { type: String },
+  totalSlots: { type: Number },
+  bookingDuration: { type: Number },
+  bookBefore: { type: String },
 });
 
 shopkeeperSchema.methods.generateAuthToken = async function () {

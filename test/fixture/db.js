@@ -28,7 +28,7 @@ const customerTwo = {
 const shopkeeperOneId = new mongoose.Types.ObjectId();
 const shopkeeperOne = {
   _id: shopkeeperOneId,
-  name: 'Anonymous',
+  name: 'shopkeeper1',
   email: 'abc@xyz.com',
   password: 'Shivi@123',
   tokens: [
@@ -64,6 +64,11 @@ module.exports = {
   customerOne,
   customerTwoId,
   customerTwo,
+  shopkeeperOneId,
+  shopkeeperOne,
+  shopkeeperTwoId,
+  shopkeeperTwo,
+  notExistToken: jwt.sign({}, process.env.SECRET_CODE, { expiresIn: 0 }),
   setupDatabase,
   cleanupDatabase,
 };

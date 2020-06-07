@@ -78,7 +78,8 @@
         "server.js",
         "connectDB.js",
         "src/models/*.js",
-        "test/fixture/*.js"
+        "test/fixture/*.js",
+        "src/middleware/*.js"
       ],
       "rules": { "no-process-env": "off" }
     },

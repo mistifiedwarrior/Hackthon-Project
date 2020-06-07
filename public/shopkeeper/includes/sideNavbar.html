@@ -1,0 +1,94 @@
+<div class="side-navbar">
+  <div class="profile">
+    <div class="image"></div>
+    <div class="name"></div>
+    <div class="email"></div>
+  </div>
+  <a class="side-menu active" href="dashboard.html">Dashboard</a>
+  <a class="side-menu" href="">Posts</a>
+  <a class="side-menu" href="account.html">Account</a>
+  <a class="side-menu" id="logout">Logout</a>
+</div>
+
+<style>
+  .side-navbar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #ddd;
+  }
+  @media (max-width: 768px) {
+    .side-navbar {
+      width: 0;
+      margin-left: -100vw;
+      transition: 0.5s;
+    }
+    .show-sidebar {
+      transition: 0.5s;
+      min-width: 280px;
+      margin-left: 0;
+    }
+  }
+  .profile {
+    padding-top: 4%;
+    height: 240px;
+    background-color: rgb(12, 77, 162, 0.9);
+    align-items: center;
+    border: 1px solid black;
+  }
+
+  .profile .image {
+    height: 160px;
+    width: 160px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-image: url('./images/profile.png');
+    background-size: contain;
+    background-color: #aaa;
+  }
+  .profile > div {
+    color: white;
+    padding: 2%;
+    text-align: center;
+  }
+  @media (max-width: 420px) {
+    .profile {
+      padding-top: 2%;
+      height: 172px;
+    }
+    .profile .image {
+      height: 120px;
+      width: 120px;
+    }
+    .profile > div {
+      padding: 1% 2%;
+    }
+  }
+  .left-sidebar {
+    width: 20%;
+    background-color: #ddd;
+    border: 1px solid #0c4da2;
+    display: flex;
+    flex-direction: column;
+  }
+  .side-menu {
+    color: #0c4da2;
+    font-size: 20px;
+    padding: 2%;
+    text-decoration: none;
+  }
+  @media (max-width: 420px) {
+    .show-sidebar {
+      transition: 0.5s;
+      min-width: 280px;
+      margin-left: 0;
+    }
+  }
+
+  .side-menu:hover {
+    background-color: rgb(0, 0, 0, 0.2);
+  }
+  .active {
+    background-color: rgb(12, 77, 162, 0.5);
+  }
+</style>

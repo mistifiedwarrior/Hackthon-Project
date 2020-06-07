@@ -4,4 +4,61 @@
 }
 body {
   font-family: sans-serif;
+  display: flex;
+  justify-content: start;
+}
+a {
+  cursor: pointer;
+}
+#side-navbar {
+  width: 18%;
+  border-right: 1px solid blue;
+}
+#main-content {
+  width: 82%;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 4px 0;
+  font-size: 20px;
+  position: fixed;
+  width: 82%;
+  display: flex;
+}
+.header .icon {
+  display: none;
+}
+.header .text {
+  width: 100%;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  #side-navbar {
+    width: 0px;
+    margin-left: -1px;
+    margin-top: 30px;
+  }
+  #main-content {
+    width: 100%;
+  }
+  .header {
+    width: 100%;
+    background-color: #0c4da2;
+    border-bottom: 1px solid #333;
+  }
+  .header .icon {
+    display: block;
+    text-align: center;
+    width: 15%;
+  }
+  .header .text {
+    text-align: left;
+    width: 85%;
+  }
+}
+.fa-bars {
+  text-align: left;
 }

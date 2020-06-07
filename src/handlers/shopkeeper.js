@@ -26,4 +26,8 @@ const loginShopkeeper = async (req, res) => {
   }
 };
 
-module.exports = { registerShopkeeper, loginShopkeeper };
+const serverMyProfile = async (req, res) => {
+  res.send({ email: req.shopkeeper.email, name: req.shopkeeper.name });
+};
+
+module.exports = { registerShopkeeper, loginShopkeeper, serverMyProfile };

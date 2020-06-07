@@ -1,7 +1,12 @@
 const request = require('supertest');
 const { app } = require('../src/router');
 
-const { setupDatabase, cleanupDatabase } = require('./fixture/db');
+const {
+  shopkeeperOne,
+  notExistToken,
+  setupDatabase,
+  cleanupDatabase,
+} = require('./fixture/db');
 
 describe('shopkeeper', () => {
   describe('static page', () => {
@@ -69,6 +74,33 @@ describe('shopkeeper', () => {
         .post('/shopkeeper/login')
         .send({ email: 'notregistered@xyz.com', password: 'Shivi@3' })
         .expect(404);
+    });
+  });
+
+  describe('Auth and Serve my profile', () => {
+    beforeEach(setupDatabase);
+    afterEach(cleanupDatabase);
+
+    it('Should serve my profile', async () => {
+      await request(app)
+        .get('/shopkeeper/myProfile')
+        .set('Cookie', `shopkeeper=${shopkeeperOne.tokens[0].token}`)
+        .expect(200)
+        .expect({ name: 'shopkeeper1', email: 'abc@xyz.com' });
+    });
+
+    it('should not auth if token is not right', async () => {
+      await request(app)
+        .get('/shopkeeper/myProfile')
+        .set('Cookie', 'shopkeeper="randomToken"}')
+        .expect(302);
+    });
+
+    it('Should not auth if shopkeeper does not exists', async () => {
+      await request(app)
+        .get('/shopkeeper/myProfile')
+        .set('Cookie', `shopkeeper=${notExistToken}`)
+        .expect(302);
     });
   });
 });
