@@ -91,6 +91,8 @@
     {
       "files": ["public/*/*/*.js", "public/*/*/*/*.js"],
       "rules": {
+        "no-console": "off",
+        "curly": "off",
         "no-magic-numbers": "off",
         "no-undef": "off",
         "no-unused-vars": "off"

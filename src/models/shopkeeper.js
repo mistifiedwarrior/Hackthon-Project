@@ -8,23 +8,25 @@ const shopkeeperSchema = new mongoose.Schema({
   password: { type: String, trim: true, required: true },
   registeredDate: { type: Number },
   address: {
+    shop: {
+      name: { type: String, trim: true },
+      description: { type: String, trim: true },
+    },
     state: { type: String },
     district: { type: String },
     city: { type: String },
     landmark: { type: String },
-    pin: { type: Number },
+    zipCode: { type: Number },
     geoCode: { latitude: { type: Number }, longitude: { type: Number } },
   },
   tokens: [{ token: { type: String } }],
-  shop: {
-    name: { type: String, trim: true },
-    description: { type: String, trim: true },
+  timing: {
+    openingTime: { type: String },
+    closingTime: { type: String },
+    totalSlots: { type: Number },
+    bookingDuration: { type: Number },
+    bookBefore: { type: String },
   },
-  openingTime: { type: String },
-  closingTime: { type: String },
-  totalSlots: { type: Number },
-  bookingDuration: { type: Number },
-  bookBefore: { type: String },
 });
 
 shopkeeperSchema.methods.generateAuthToken = async function () {

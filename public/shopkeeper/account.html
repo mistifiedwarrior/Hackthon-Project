@@ -9,52 +9,170 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="./scripts/scrollTop.js"></script>
-    <script src="./scripts/loadPartialHtml/loadSideNavbar.js"></script>
-    <script src="./scripts/account.js"></script>
+    <script src="./scripts/loadSideNavbar.js" async></script>
+    <script src="./scripts/account.js" async></script>
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
-    <title>Go2Shop | Customer</title>
+    <title>Go2Shop | ShopKeeper</title>
   </head>
   <body>
-    <div class="side-navbar"></div>
-    <div class="main-content">
-      <div class="header">Account</div>
-      <div>
-        <div class="details-title">
-          <div id="shop">Shop</div>
-          <div id="address">Address</div>
-          <div id="booking">Booking</div>
+    <div id="side-navbar"></div>
+    <div id="main-content">
+      <div class="header">
+        <span class="icon" onclick="toggleSidebar(this)">
+          <i class="fa fa-bars" title="bar"></i>
+        </span>
+        <span class="text">Account</span>
+      </div>
+      <div class="content">
+        <div class="shop detail-container">
+          <div class="title"><span> About Shop</span></div>
+          <div class="details">
+            <div class="shop-information">
+              <span id="shop-name">Amazon Book Store</span>
+            </div>
+            <div>
+              <span class="heading">Descriptions: </span>
+              <span id="shop-description">
+                In this shop you can easily find you all your diploma books
+              </span>
+            </div>
+            <div class="address-container">
+              <div>
+                <span class="heading">Address: </span>
+                <span id="address-1"></span>
+                <span id="address-2"></span>
+              </div>
+              <div class="address-circle">
+                <div>
+                  <span>City: </span>
+                  <span id="city"></span>
+                </div>
+                <div>
+                  <span>District: </span>
+                  <span id="district"></span>
+                </div>
+                <div>
+                  <span>State: </span>
+                  <span id="state"></span>
+                </div>
+                <div>
+                  <span>Zip Code:</span>
+                  <span id="zip-code"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div><button class="action" id="address">Edit Details</button></div>
         </div>
-        <div class="details">
-          <div id="shop-details">
-            <label>Shop Name</label>
-            <input type="text" />
-            <label>Descriptions</label>
-            <input type="text" />
+        <div class="shop detail-container">
+          <div class="title"><span>Shop Timing</span></div>
+          <div class="details">
+            <div>
+              <span class="heading">Opening Time: </span>
+              <span id="opening-time"></span>
+            </div>
+            <div>
+              <span class="heading">Closing Time: </span>
+              <span id="closing-time"></span>
+            </div>
+            <div>
+              <span class="heading">Total Slots: </span>
+              <span id="total-slots"></span>
+            </div>
+            <div>
+              <span class="heading">Booking Duration: </span>
+              <span id="booking-duration"></span>
+            </div>
+            <div>
+              <span class="heading">Booking Before (in Days): </span>
+              <span id="booking-before"></span>
+            </div>
           </div>
-          <div id="address-details">
-            <label>Address 1</label>
-            <input type="text" />
-            <label>Address 2</label>
-            <input type="text" />
-            <label>City</label>
-            <input type="text" />
-            <label>State</label>
-            <input type="text" />
-            <label>District</label>
-            <input type="text" />
+          <div><button class="action" id="timing">Edit Details</button></div>
+        </div>
+        <div class="modals hidden">
+          <div id="address-modal" class="hidden">
+            <form>
+              <div class="form-title">Shop Information</div>
+              <div class="input">
+                <label>Shop Name: </label>
+                <input type="text" id="shop-name" />
+              </div>
+              <div class="input">
+                <label>Shop Description: </label>
+                <input type="text" id="shop-description" />
+              </div>
+              <div class="input">
+                <label>Address 1: </label>
+                <input type="text" id="address-1" />
+              </div>
+              <div class="input">
+                <label>Address 2: </label>
+                <input type="text" id="address-2" />
+              </div>
+              <div class="row">
+                <div class="input">
+                  <label>City: </label>
+                  <input type="text" id="address-2" />
+                </div>
+                <div class="input">
+                  <label>District: </label>
+                  <input type="text" id="address-2" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="input">
+                  <label>State: </label>
+                  <input type="text" id="address-2" />
+                </div>
+                <div class="input">
+                  <label>Pin Code: </label>
+                  <input
+                    type="number"
+                    id="address-2"
+                    minlength="6"
+                    maxlength="6"
+                  />
+                </div>
+              </div>
+              <div class="submit">
+                <input type="submit" value="Update Details" />
+              </div>
+            </form>
+            <div class="cross">
+              <button onclick="closeModal(this)">X</button>
+            </div>
           </div>
-          <div id="booking-details">
-            <label>Opening time</label>
-            <input type="text" />
-            <label>Closing time</label>
-            <input type="text" />
-            <label>Total Slots</label>
-            <input type="text" />
-            <label>Booking Duration</label>
-            <input type="text" />
-            <label>Book Open </label>
-            <input type="text" />
+          <div id="timing-modal" class="hidden">
+            <form>
+              <div class="form-title">Shop Information</div>
+              <div class="input">
+                <label>Opening Time: </label>
+                <input type="time" id="shop-name" />
+              </div>
+              <div class="input">
+                <label>Closing Time: </label>
+                <input type="time" id="shop-description" />
+              </div>
+              <div class="input">
+                <label>Total Slots: </label>
+                <input type="text" id="address-1" />
+              </div>
+              <div class="input">
+                <label>Booking Duration (in Min): </label>
+                <input type="text" id="address-2" />
+              </div>
+              <div class="input">
+                <label>Booking Before: </label>
+                <input type="text" id="address-2" />
+              </div>
+              <div class="submit">
+                <input type="submit" value="Update Details" />
+              </div>
+            </form>
+            <div class="cross">
+              <button onclick="closeModal(this)">X</button>
+            </div>
           </div>
         </div>
       </div>

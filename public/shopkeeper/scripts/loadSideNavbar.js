@@ -1,4 +1,6 @@
 const getElement = (selector) => document.querySelector(selector);
+const getAllElement = (selector) =>
+  Array.from(document.querySelectorAll(selector));
 
 const showSidebar = () => {
   getElement('.side-navbar').classList.add('show-sidebar');
@@ -20,15 +22,33 @@ const renderShopkeeperDetails = (shopkeeper) => {
   getElement('.profile .email').innerText = shopkeeper.email;
 };
 
-const loadProfile = () => {
-  fetch('/shopkeeper/myProfile')
-    .then((res) => res.json())
-    .then(renderShopkeeperDetails);
+const loadProfile = async () => {
+  try {
+    const res = await fetch('/shopkeeper/myProfile');
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    const data = await res.json();
+    renderShopkeeperDetails(data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-const loadSideNavbar = function () {
-  fetch('./includes/sideNavbar.html')
-    .then((res) => res.text())
-    .then((data) => (getElement('#side-navbar').innerHTML = data))
-    .then(loadProfile);
+const listenersOnLinks = () => {
+  getAllElement('.side-navbar a').forEach((element) => {
+    element.addEventListener('click', () => {
+      getElement('.side-navbar .active').classList.remove('active');
+      element.classList.add('active');
+    });
+  });
+};
+
+const loadSideNavbar = async function () {
+  try {
+    const res = await fetch('./includes/sideNavbar.html');
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    getElement('#side-navbar').innerHTML = await res.text();
+    await loadProfile();
+  } catch (error) {
+    console.error(error);
+  }
 };

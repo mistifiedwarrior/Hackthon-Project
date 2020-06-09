@@ -4,7 +4,7 @@
     <div class="name"></div>
     <div class="email"></div>
   </div>
-  <a class="side-menu active" href="dashboard.html">Dashboard</a>
+  <a class="side-menu" href="dashboard.html">Dashboard</a>
   <a class="side-menu" href="">Posts</a>
   <a class="side-menu" href="account.html">Account</a>
   <a class="side-menu" id="logout">Logout</a>
@@ -12,10 +12,12 @@
 
 <style>
   .side-navbar {
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 100vh;
     background-color: #ddd;
+    border-right: 1px solid #0c4da2;
   }
   @media (max-width: 768px) {
     .side-navbar {
@@ -31,15 +33,14 @@
   }
   .profile {
     padding-top: 4%;
-    height: 240px;
-    background-color: rgb(12, 77, 162, 0.9);
+    background-color: rgb(12, 77, 162);
     align-items: center;
     border: 1px solid black;
   }
 
   .profile .image {
-    height: 160px;
-    width: 160px;
+    height: 12vw;
+    width: 12vw;
     margin: 0 auto;
     border-radius: 50%;
     background-image: url('./images/profile.png');
@@ -51,7 +52,7 @@
     padding: 2%;
     text-align: center;
   }
-  @media (max-width: 420px) {
+  @media (max-width: 768px) {
     .profile {
       padding-top: 2%;
       height: 172px;
@@ -59,6 +60,15 @@
     .profile .image {
       height: 120px;
       width: 120px;
+    }
+    .profile > div {
+      padding: 1% 2%;
+    }
+  }
+  @media (max-width: 420px) {
+    .profile {
+      padding-top: 2%;
+      height: 172px;
     }
     .profile > div {
       padding: 1% 2%;
