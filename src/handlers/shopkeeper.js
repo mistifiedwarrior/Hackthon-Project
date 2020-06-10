@@ -30,4 +30,19 @@ const serverMyProfile = async (req, res) => {
   res.send({ email: req.shopkeeper.email, name: req.shopkeeper.name });
 };
 
-module.exports = { registerShopkeeper, loginShopkeeper, serverMyProfile };
+const updateDetails = async (req, res) => {
+  try {
+    const shopkeeper = req.body.shopkeeper;
+    await Shopkeeper.findOneAndUpdate({ _id: req.shopkeeper._id }, shopkeeper);
+    res.status(202).end();
+  } catch (error) {
+    res.status(501).end();
+  }
+};
+
+module.exports = {
+  registerShopkeeper,
+  loginShopkeeper,
+  serverMyProfile,
+  updateDetails,
+};

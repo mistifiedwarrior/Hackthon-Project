@@ -15,7 +15,8 @@ const shopkeeperSchema = new mongoose.Schema({
     state: { type: String },
     district: { type: String },
     city: { type: String },
-    landmark: { type: String },
+    address1: { type: String },
+    address2: { type: String },
     zipCode: { type: Number },
     geoCode: { latitude: { type: Number }, longitude: { type: Number } },
   },
@@ -23,7 +24,7 @@ const shopkeeperSchema = new mongoose.Schema({
   timing: {
     openingTime: { type: String },
     closingTime: { type: String },
-    totalSlots: { type: Number },
+    slots: { type: Number },
     bookingDuration: { type: Number },
     bookBefore: { type: String },
   },

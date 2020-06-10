@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { Shopkeeper } = require('../models/shopkeeper');
 
-// eslint-disable-next-line max-statements
 const auth = async function (req, res, next) {
   try {
     const token = req.cookies.shopkeeper;

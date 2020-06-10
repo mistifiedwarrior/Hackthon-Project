@@ -65,10 +65,5 @@ a {
 
 .content {
   margin: 1%;
-  margin-top: 4%;
-}
-@media (max-width: 768px) {
-  .content {
-    margin-top: 12%;
-  }
+  margin-top: 40px;
 }

@@ -1,5 +1,7 @@
 const request = require('supertest');
+const sinon = require('sinon');
 const { app } = require('../src/router');
+const { Shopkeeper } = require('../src/models/shopkeeper');
 
 const {
   shopkeeperOne,
@@ -101,6 +103,62 @@ describe('shopkeeper', () => {
         .get('/shopkeeper/myProfile')
         .set('Cookie', `shopkeeper=${notExistToken}`)
         .expect(302);
+    });
+  });
+
+  describe('Update shopkeeper', () => {
+    beforeEach(setupDatabase);
+    afterEach(cleanupDatabase);
+
+    it('Should update the shopkeeper address', async () => {
+      await request(app)
+        .put('/shopkeeper/updateDetails')
+        .set('Cookie', `shopkeeper=${shopkeeperOne.tokens[0].token}`)
+        .send({ shopkeeper: { address: { shop: { name: 'Shop Name' } } } })
+        .expect(202);
+    });
+
+    it('Should should give 501 error', async () => {
+      sinon.replace(Shopkeeper, 'findOneAndUpdate', () => {
+        throw new Error();
+      });
+      await request(app)
+        .put('/shopkeeper/updateDetails')
+        .set('Cookie', `shopkeeper=${shopkeeperOne.tokens[0].token}`)
+        .send({ shopkeeper: { address: {} } })
+        .expect(501);
+      sinon.restore();
+    });
+    it('Should update the shopkeeper timing details', async () => {
+      await request(app)
+        .put('/shopkeeper/updateDetails')
+        .set('Cookie', `shopkeeper=${shopkeeperOne.tokens[0].token}`)
+        .send({ shopkeeper: { timing: { openingTime: '9:00', slots: 5 } } })
+        .expect(202);
+    });
+
+    it('Should should give 501 error', async () => {
+      sinon.replace(Shopkeeper, 'findOneAndUpdate', () => {
+        throw new Error();
+      });
+      await request(app)
+        .put('/shopkeeper/updateDetails')
+        .set('Cookie', `shopkeeper=${shopkeeperOne.tokens[0].token}`)
+        .send({ shopkeeper: { timing: {} } })
+        .expect(501);
+      sinon.restore();
+    });
+  });
+
+  describe('Get Shopkeeper', () => {
+    beforeEach(setupDatabase);
+    afterEach(cleanupDatabase);
+
+    it('Should serve the shopkeeper details', async () => {
+      await request(app)
+        .get('/shopkeeper/shopkeeper')
+        .set('Cookie', `shopkeeper=${shopkeeperOne.tokens[0].token}`)
+        .expect(200);
     });
   });
 });

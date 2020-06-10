@@ -25,16 +25,14 @@
       </div>
       <div class="content">
         <div class="shop detail-container">
-          <div class="title"><span> About Shop</span></div>
+          <div class="title"><span>About Shop</span></div>
           <div class="details">
             <div class="shop-information">
-              <span id="shop-name">Amazon Book Store</span>
+              <span id="shop-name">Shop Name haven't provided</span>
             </div>
             <div>
               <span class="heading">Descriptions: </span>
-              <span id="shop-description">
-                In this shop you can easily find you all your diploma books
-              </span>
+              <span id="shop-description"></span>
             </div>
             <div class="address-container">
               <div>
@@ -64,6 +62,7 @@
           </div>
           <div><button class="action" id="address">Edit Details</button></div>
         </div>
+
         <div class="shop detail-container">
           <div class="title"><span>Shop Timing</span></div>
           <div class="details">
@@ -90,49 +89,46 @@
           </div>
           <div><button class="action" id="timing">Edit Details</button></div>
         </div>
+
         <div class="modals hidden">
           <div id="address-modal" class="hidden">
             <form>
               <div class="form-title">Shop Information</div>
+              <div class="address-status error"></div>
               <div class="input">
-                <label>Shop Name: </label>
-                <input type="text" id="shop-name" />
+                <label>Shop Name<i class="required"></i></label>
+                <input type="text" id="shop-name" required />
               </div>
               <div class="input">
-                <label>Shop Description: </label>
-                <input type="text" id="shop-description" />
+                <label>Shop Description</label>
+                <textarea id="shop-description" rows="3"></textarea>
               </div>
               <div class="input">
-                <label>Address 1: </label>
-                <input type="text" id="address-1" />
+                <label>Address 1<i class="required"></i></label>
+                <input type="text" id="address-1" required />
               </div>
               <div class="input">
-                <label>Address 2: </label>
+                <label>Address 2 </label>
                 <input type="text" id="address-2" />
               </div>
               <div class="row">
                 <div class="input">
-                  <label>City: </label>
-                  <input type="text" id="address-2" />
+                  <label>City<i class="required"></i></label>
+                  <input type="text" id="city" required />
                 </div>
                 <div class="input">
-                  <label>District: </label>
-                  <input type="text" id="address-2" />
+                  <label>District<i class="required"></i></label>
+                  <input type="text" id="district" required />
                 </div>
               </div>
               <div class="row">
                 <div class="input">
-                  <label>State: </label>
-                  <input type="text" id="address-2" />
+                  <label>State<i class="required"></i></label>
+                  <input type="text" id="state" required />
                 </div>
                 <div class="input">
-                  <label>Pin Code: </label>
-                  <input
-                    type="number"
-                    id="address-2"
-                    minlength="6"
-                    maxlength="6"
-                  />
+                  <label>Pin Code<i class="required"></i></label>
+                  <input type="number" id="pin-code" max="999999" required />
                 </div>
               </div>
               <div class="submit">
@@ -140,38 +136,45 @@
               </div>
             </form>
             <div class="cross">
-              <button onclick="closeModal(this)">X</button>
+              <button onclick="closeModal(this.parentElement.parentElement)">
+                X
+              </button>
             </div>
           </div>
           <div id="timing-modal" class="hidden">
             <form>
-              <div class="form-title">Shop Information</div>
+              <div class="form-title">Shop Timing</div>
+              <div class="timing-status error"></div>
               <div class="input">
-                <label>Opening Time: </label>
-                <input type="time" id="shop-name" />
+                <label>Opening Time<i class="required"></i> </label>
+                <input type="time" id="opening-time" required />
               </div>
               <div class="input">
-                <label>Closing Time: </label>
-                <input type="time" id="shop-description" />
+                <label>Closing Time<i class="required"></i></label>
+                <input type="time" id="closing-time" required />
               </div>
               <div class="input">
-                <label>Total Slots: </label>
-                <input type="text" id="address-1" />
+                <label>Total Slots<i class="required"></i> </label>
+                <input type="number" id="slots" required max="10" />
               </div>
               <div class="input">
-                <label>Booking Duration (in Min): </label>
-                <input type="text" id="address-2" />
+                <label
+                  >Booking Duration (in Mins)<i class="required"></i>
+                </label>
+                <input type="number" id="duration" required max="90" />
               </div>
               <div class="input">
-                <label>Booking Before: </label>
-                <input type="text" id="address-2" />
+                <label>Booking Before (in Days)<i class="required"></i></label>
+                <input type="number" id="book-before" max="7" />
               </div>
               <div class="submit">
                 <input type="submit" value="Update Details" />
               </div>
             </form>
             <div class="cross">
-              <button onclick="closeModal(this)">X</button>
+              <button onclick="closeModal(this.parentElement.parentElement)">
+                X
+              </button>
             </div>
           </div>
         </div>
