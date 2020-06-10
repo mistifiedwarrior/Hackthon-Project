@@ -3,7 +3,7 @@ const renderAddressOnPage = (address) => {
   getElement('#shop-name').innerText = shop.name;
   getElement('#shop-description').innerText = shop.description;
   getElement('#address-1').innerText = address.address1;
-  getElement('#address-2').innerText = address.address2;
+  getElement('#address-2').innerText = address.address2 || '';
   getElement('#city').innerText = address.city;
   getElement('#district').innerText = address.district;
   getElement('#state').innerText = address.state;
@@ -15,7 +15,7 @@ const renderAddressOnModal = (address) => {
   getElement('#address-modal #shop-name').value = shop.name;
   getElement('#address-modal #shop-description').value = shop.description;
   getElement('#address-modal #address-1').value = address.address1;
-  getElement('#address-modal #address-2').value = address.address2;
+  getElement('#address-modal #address-2').value = address.address2 || '';
   getElement('#address-modal #city').value = address.city;
   getElement('#address-modal #district').value = address.district;
   getElement('#address-modal #state').value = address.state;
