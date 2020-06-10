@@ -36,7 +36,7 @@ const updateAddress = async (event) => {
     const res = await fetch(url, getOptions({ shopkeeper }, 'PUT'));
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     closeModal(getElement('#address-modal'));
-    renderAddress(address);
+    renderAddress(shopkeeper.address);
   } catch (error) {
     getElement('.address-status').innerHTML = 'Something went wrong, try again';
   }
@@ -51,7 +51,7 @@ const updateTiming = async (event) => {
     const res = await fetch(url, getOptions({ shopkeeper }, 'PUT'));
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     closeModal(getElement('#timing-modal'));
-    renderTiming(timing);
+    renderTiming(shopkeeper.timing);
   } catch (error) {
     getElement('.timing-status').innerHTML = 'Something went wrong, try again';
   }
