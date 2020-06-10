@@ -9,7 +9,12 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <script
+      src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"
+      type="text/javascript"
+    ></script>
     <script src="./scripts/loadSideNavbar.js" async></script>
+    <script src="./scripts/renderAccount.js" async></script>
     <script src="./scripts/account.js" async></script>
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
     <title>Go2Shop | ShopKeeper</title>
@@ -32,30 +37,33 @@
             </div>
             <div>
               <span class="heading">Descriptions: </span>
-              <span id="shop-description"></span>
+              <span id="shop-description"> Not Provided</span>
             </div>
             <div class="address-container">
               <div>
                 <span class="heading">Address: </span>
-                <span id="address-1"></span>
-                <span id="address-2"></span>
+                <span id="address-1">Not Provided</span><br />
+                <span
+                  id="address-2"
+                  style="margin-left: 76px; font-weight: 300;"
+                ></span>
               </div>
               <div class="address-circle">
                 <div>
-                  <span>City: </span>
-                  <span id="city"></span>
+                  <span class="heading">City: </span>
+                  <span id="city">Not Provided</span>
                 </div>
                 <div>
-                  <span>District: </span>
-                  <span id="district"></span>
+                  <span class="heading">District: </span>
+                  <span id="district">Not Provided</span>
                 </div>
                 <div>
-                  <span>State: </span>
-                  <span id="state"></span>
+                  <span class="heading">State: </span>
+                  <span id="state">Not Provided</span>
                 </div>
                 <div>
-                  <span>Zip Code:</span>
-                  <span id="zip-code"></span>
+                  <span class="heading">Pin Code: </span>
+                  <span id="pin-code">Not Provided</span>
                 </div>
               </div>
             </div>

@@ -32,8 +32,11 @@ const serverMyProfile = async (req, res) => {
 
 const updateDetails = async (req, res) => {
   try {
-    const shopkeeper = req.body.shopkeeper;
-    await Shopkeeper.findOneAndUpdate({ _id: req.shopkeeper._id }, shopkeeper);
+    const { address, timing } = req.body.shopkeeper;
+    const shopkeeper = await Shopkeeper.findById(req.shopkeeper._id);
+    address && (shopkeeper.address = address);
+    timing && (shopkeeper.timing = timing);
+    await shopkeeper.save();
     res.status(202).end();
   } catch (error) {
     res.status(501).end();

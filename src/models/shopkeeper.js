@@ -17,7 +17,7 @@ const shopkeeperSchema = new mongoose.Schema({
     city: { type: String },
     address1: { type: String },
     address2: { type: String },
-    zipCode: { type: Number },
+    pinCode: { type: Number },
     geoCode: { latitude: { type: Number }, longitude: { type: Number } },
   },
   tokens: [{ token: { type: String } }],

@@ -23,23 +23,20 @@ const getTiming = () => {
   const openingTime = getElement('#timing-modal #opening-time').value;
   const closingTime = getElement('#timing-modal #closing-time').value;
   const slots = +getElement('#timing-modal #slots').value;
-  const booingDuration = +getElement('#timing-modal #duration').value;
+  const bookingDuration = +getElement('#timing-modal #duration').value;
   const bookBefore = +getElement('#timing-modal #book-before').value;
-  return { openingTime, closingTime, slots, booingDuration, bookBefore };
+  return { openingTime, closingTime, slots, bookingDuration, bookBefore };
 };
-
-const renderAddress = () => {};
-const renderTiming = () => {};
 
 const updateAddress = async (event) => {
   try {
     event.preventDefault();
-    const address = getAddress();
-    const url = '/shopkeeper/updateAddress';
-    const res = await fetch(url, getOptions({ address }, 'PUT'));
+    const shopkeeper = { address: getAddress() };
+    const url = '/shopkeeper/updateDetails';
+    const res = await fetch(url, getOptions({ shopkeeper }, 'PUT'));
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    renderAddress(address);
     closeModal(getElement('#address-modal'));
+    renderAddress(address);
   } catch (error) {
     getElement('.address-status').innerHTML = 'Something went wrong, try again';
   }
@@ -48,12 +45,13 @@ const updateAddress = async (event) => {
 const updateTiming = async (event) => {
   try {
     event.preventDefault();
-    const timing = getTiming();
-    const url = '/shopkeeper/updateTiming';
-    const res = await fetch(url, getOptions({ timing }, 'PUT'));
+    const shopkeeper = { timing: getTiming() };
+    console.log(shopkeeper);
+    const url = '/shopkeeper/updateDetails';
+    const res = await fetch(url, getOptions({ shopkeeper }, 'PUT'));
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    renderTiming(timing);
     closeModal(getElement('#timing-modal'));
+    renderTiming(timing);
   } catch (error) {
     getElement('.timing-status').innerHTML = 'Something went wrong, try again';
   }
@@ -80,9 +78,22 @@ const closeModal = (modalName) => {
   modalName.parentElement.classList.add('hidden');
 };
 
+const loadShopkeeper = async () => {
+  try {
+    const res = await fetch('/shopkeeper/shopkeeper');
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    const shopkeeper = await res.json();
+    renderAddress(shopkeeper.address);
+    renderTiming(shopkeeper.timing);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const main = async () => {
   await loadSideNavbar();
   addListenerOnEditButtons();
+  await loadShopkeeper();
   listenerOnSubmit();
 };
 

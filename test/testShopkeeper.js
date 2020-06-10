@@ -119,7 +119,7 @@ describe('shopkeeper', () => {
     });
 
     it('Should should give 501 error', async () => {
-      sinon.replace(Shopkeeper, 'findOneAndUpdate', () => {
+      sinon.replace(Shopkeeper, 'findById', () => {
         throw new Error();
       });
       await request(app)
@@ -138,7 +138,7 @@ describe('shopkeeper', () => {
     });
 
     it('Should should give 501 error', async () => {
-      sinon.replace(Shopkeeper, 'findOneAndUpdate', () => {
+      sinon.replace(Shopkeeper, 'findById', () => {
         throw new Error();
       });
       await request(app)
