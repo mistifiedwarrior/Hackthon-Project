@@ -1,6 +1,7 @@
 const renderAddressOnPage = (address) => {
-  getElement('#shop-name').innerText = address.shop.name;
-  getElement('#shop-description').innerText = address.shop.description;
+  const shop = address.shop || {};
+  getElement('#shop-name').innerText = shop.name;
+  getElement('#shop-description').innerText = shop.description;
   getElement('#address-1').innerText = address.address1;
   getElement('#address-2').innerText = address.address2;
   getElement('#city').innerText = address.city;
