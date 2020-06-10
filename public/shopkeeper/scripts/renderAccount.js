@@ -38,12 +38,14 @@ const renderTimingOnModal = (timing) => {
   getElement('#timing-modal #book-before').value = timing.bookBefore;
 };
 
-const renderAddress = (address = {}) => {
+const renderAddress = (address) => {
+  if (!address) return;
   renderAddressOnPage(address);
   renderAddressOnModal(address);
 };
 
-const renderTiming = (timing = {}) => {
+const renderTiming = (timing) => {
+  if (!timing) return;
   renderTimingOnPage(timing);
   renderTimingOnModal(timing);
 };
