@@ -1,6 +1,3 @@
-const getElement = (selector) => document.querySelector(selector);
-const getAllElement = (selector) => document.querySelectorAll(selector);
-
 const getOptions = function (body, method = 'POST') {
   return {
     method,
@@ -24,7 +21,7 @@ const showMessage = function (status) {
   const $status = getElement('.status');
   const text = 'Credentials not matched';
   if (status) {
-    window.location.href = 'dashboard.html';
+    window.location.href = 'index.html';
     return;
   }
   $status.innerText = text;
@@ -61,9 +58,10 @@ const enableSubmitBtn = function () {
   });
 };
 
-const main = function () {
+const main = async function () {
   enableSubmitBtn();
   listenerOnSubmitBtn();
+  await loadPartialHTML();
 };
 
 window.onload = main;

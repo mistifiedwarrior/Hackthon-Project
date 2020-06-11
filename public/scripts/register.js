@@ -1,6 +1,3 @@
-const getElement = (selector) => document.querySelector(selector);
-const getAllElement = (selector) => document.querySelectorAll(selector);
-
 const getOptions = function (body, method = 'POST') {
   return {
     method,
@@ -88,7 +85,8 @@ const enableSubmitBtn = function () {
   });
 };
 
-const main = function () {
+const main = async function () {
+  await loadPartialHTML();
   enableSubmitBtn();
   listenerOnSubmitBtn();
   listenerOnConfirmPassword();

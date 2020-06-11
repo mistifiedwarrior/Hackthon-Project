@@ -1,14 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-body {
-  font-family: sans-serif;
-}
 .center-container {
-  position: absolute;
-  top: 16vh;
-  left: 35vw;
+  height: 80vh;
+  align-items: center;
+  margin: 0 auto;
   width: 28vw;
 }
 @media (max-width: 420px) {
@@ -66,12 +59,6 @@ form input {
   margin-top: 1%;
   width: 100%;
 }
-#username-availability {
-  padding: 2%;
-  padding-bottom: 0;
-  font-size: 14px;
-  color: green;
-}
 
 .submit {
   display: flex;
@@ -106,21 +93,6 @@ form input {
 .sibling-page a:hover {
   color: #032081;
 }
-.back-link {
-  margin: 4%;
-  text-align: center;
-}
-.back-link a {
-  color: #0c4da2;
-  text-decoration: none;
-}
-.back-link a::before {
-  content: '\2190';
-}
-.back-link a:hover {
-  color: #032081;
-}
-
 .submit > .none-pointer {
   pointer-events: none;
   background-color: #7aa0d2;
