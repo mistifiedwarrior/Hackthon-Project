@@ -21,9 +21,21 @@ const loadFooter = async function () {
   }
 };
 
-const renderProfile = async () => {};
+const renderProfile = async () => {
+  try {
+    console.log('hello');
+    const res = await fetch('/customer/myProfile');
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    const myData = await res.json();
+    const $profile = getElement('#profile');
+    $profile.innerHTML = `<a href="profile/${myData._id}">${myData.name}</a>`;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const loadPartialHTML = async () => {
   await loadNavbar();
   await loadFooter();
+  await renderProfile();
 };

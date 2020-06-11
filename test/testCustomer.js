@@ -1,7 +1,12 @@
 const request = require('supertest');
 const { app } = require('../src/router');
 
-const { setupDatabase, cleanupDatabase } = require('./fixture/db');
+const {
+  customerOne,
+  customerOneId,
+  setupDatabase,
+  cleanupDatabase,
+} = require('./fixture/db');
 
 describe('Customer', () => {
   describe('static page', () => {
@@ -66,6 +71,22 @@ describe('Customer', () => {
         .post('/customer/login')
         .send({ email: 'notregistered@xyz.com', password: 'Shivi@3' })
         .expect(404);
+    });
+  });
+
+  describe('My profile', () => {
+    it('should serve my profile', async () => {
+      await request(app)
+        .get('/customer/myProfile')
+        .set('Cookie', `customer=${customerOne.tokens[0].token}`)
+        .expect(200);
+    });
+
+    it('should give 302 error if unauthorized user', async () => {
+      await request(app)
+        .get('/customer/myProfile')
+        .set('Cookie', 'customer=randomToken')
+        .expect(302);
     });
   });
 });

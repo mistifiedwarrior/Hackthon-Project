@@ -13,7 +13,7 @@
         <a href="/" class="icon"><i class="fa fa-home"></i></a>
       </li>
       <li><a href="/">Home</a></li>
-      <li><a href="login.html">Login</a></li>
+      <li id="profile"><a href="login.html">Login</a></li>
     </ul>
   </div>
 </div>
@@ -36,7 +36,6 @@
     word-spacing: 4px;
     letter-spacing: 2px;
   }
-
   .mobile-menu,
   input[type='checkbox'] {
     display: none;
@@ -144,6 +143,15 @@
       font-weight: 200;
       padding: 0 5px;
       border: 0;
+    }
+  }
+  #profile {
+    position: absolute;
+    right: 10px;
+  }
+  @media (max-width: 420px) {
+    #profile {
+      position: unset;
     }
   }
 </style>

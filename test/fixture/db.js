@@ -6,7 +6,7 @@ const { Shopkeeper } = require('../../src/models/shopkeeper');
 const customerOneId = new mongoose.Types.ObjectId();
 const customerOne = {
   _id: customerOneId,
-  name: 'Anonymous',
+  name: 'Customer 1',
   email: 'abc@xyz.com',
   password: 'Shivi@123',
   tokens: [
