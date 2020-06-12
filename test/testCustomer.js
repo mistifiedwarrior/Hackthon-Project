@@ -1,12 +1,10 @@
+const sinon = require('sinon');
+const { assert } = require('chai');
 const request = require('supertest');
 const { app } = require('../src/router');
+const { Shopkeeper } = require('../src/models/shopkeeper');
 
-const {
-  customerOne,
-  customerOneId,
-  setupDatabase,
-  cleanupDatabase,
-} = require('./fixture/db');
+const { customerOne, setupDatabase, cleanupDatabase } = require('./fixture/db');
 
 describe('Customer', () => {
   describe('static page', () => {
@@ -87,6 +85,37 @@ describe('Customer', () => {
         .get('/customer/myProfile')
         .set('Cookie', 'customer=randomToken')
         .expect(302);
+    });
+  });
+
+  describe('Serve All Shops', () => {
+    beforeEach(setupDatabase);
+    afterEach(cleanupDatabase);
+    it('should serve all Shops in my area', async () => {
+      const shops = await request(app)
+        .post('/customer/allShops')
+        .send({ pinCode: 123456 })
+        .expect(200);
+      assert.strictEqual(shops.body.length, 1);
+    });
+
+    it('should serve No Shops if no shop in that area my area', async () => {
+      const shops = await request(app)
+        .post('/customer/allShops')
+        .send({ pinCode: 111111 })
+        .expect(200);
+      assert.strictEqual(shops.body.length, 0);
+    });
+
+    it('should give 500 error if server is crashes', async () => {
+      sinon.replace(Shopkeeper, 'find', () => {
+        throw new Error();
+      });
+      await request(app)
+        .post('/customer/allShops')
+        .send({ pinCode: 111111 })
+        .expect(500);
+      sinon.restore();
     });
   });
 });

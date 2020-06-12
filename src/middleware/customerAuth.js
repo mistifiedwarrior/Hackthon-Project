@@ -10,7 +10,7 @@ const auth = async function (req, res, next) {
     req.customer = customer;
     next();
   } catch (error) {
-    res.redirect('./login.html');
+    res.redirect('../login.html');
   }
 };
 

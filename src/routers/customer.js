@@ -1,12 +1,17 @@
 const express = require('express');
 const { auth } = require('../middleware/customerAuth');
-const { registerCustomer, loginCustomer } = require('../handlers/customer');
+const {
+  registerCustomer,
+  loginCustomer,
+  serveAllShops,
+} = require('../handlers/customer');
 
 const customerRouter = new express.Router();
 
 customerRouter.post('/customer/login', loginCustomer);
 customerRouter.post('/customer/register', registerCustomer);
 
+customerRouter.post('/customer/allShops', serveAllShops);
 customerRouter.get('/customer/myProfile', auth, (req, res) =>
   res.send(req.customer)
 );

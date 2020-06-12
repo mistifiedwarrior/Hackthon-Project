@@ -91,6 +91,7 @@
     {
       "files": ["public/*/*.js", "public/*/*/*.js", "public/*/*/*/*.js"],
       "rules": {
+        "max-len": "off",
         "no-console": "off",
         "curly": "off",
         "no-magic-numbers": "off",

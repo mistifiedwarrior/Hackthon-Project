@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go2Shop</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/shops.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="./scripts/loadNavbarAndFooter.js"></script>
+    <script src="./scripts/shops.js"></script>
+  </head>
+  <body>
+    <div class="navbar"></div>
+    <div class="main-content">
+      <div class="title-bar">Shops</div>
+      <div class="container">
+        <div class="search-options left-sidebar">
+          <div class="sidebar-title">Filters</div>
+          <div class="search-bar">
+            <div class="title">Search By Locations</div>
+            <form class="area-pin">
+              <input
+                type="number"
+                id="pin-code"
+                max="999999"
+                required
+                placeholder="Enter area pin..."
+              />
+              <button>Search</button>
+            </form>
+            <div class="location"><button>Use My current Location</button></div>
+          </div>
+        </div>
+
+        <div class="shops">
+          <div class="shops-title-bar"></div>
+          <div class="all-shops">
+            <div class="no-shop">No shop found...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"></div>
+  </body>
+</html>

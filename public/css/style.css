@@ -13,5 +13,6 @@ a:visited {
   color: #00f;
 }
 .main-content {
-  align-items: center;
+  display: flex;
+  flex-direction: column;
 }

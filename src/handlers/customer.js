@@ -1,4 +1,5 @@
 const { Customer } = require('../models/customer');
+const { Shopkeeper } = require('../models/shopkeeper');
 
 const registerCustomer = async (req, res) => {
   try {
@@ -26,4 +27,14 @@ const loginCustomer = async (req, res) => {
   }
 };
 
-module.exports = { registerCustomer, loginCustomer };
+const serveAllShops = async (req, res) => {
+  try {
+    const pinCode = req.body.pinCode;
+    const shops = await Shopkeeper.find({ 'address.pinCode': pinCode });
+    res.send(shops);
+  } catch (error) {
+    res.status(500).end();
+  }
+};
+
+module.exports = { registerCustomer, loginCustomer, serveAllShops };

@@ -34,6 +34,14 @@ const shopkeeperOne = {
   tokens: [
     { token: jwt.sign({ _id: shopkeeperOneId }, process.env.SECRET_CODE) },
   ],
+  address: {
+    shop: { name: 'Amazon Book Center', description: 'Amazon Book Store' },
+    address1: 'address 1',
+    address2: 'address 2',
+    state: 'Uttar Pradesh',
+    city: 'Ayodhya',
+    pinCode: 123456,
+  },
 };
 
 const shopkeeperTwoId = new mongoose.Types.ObjectId();
