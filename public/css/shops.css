@@ -1,5 +1,6 @@
 .main-content {
   background: #eee;
+  font-family: sans-serif;
 }
 .title-bar {
   background: #fff;
@@ -60,9 +61,32 @@
 }
 .all-shops > div {
   padding: 8px;
+  border-bottom: 1px solid #eee;
 }
 .no-shop {
   font-size: 24px;
   text-align: center;
   align-items: center;
+}
+.shop {
+  display: flex;
+  flex-direction: column;
+}
+.shop-name {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+}
+.shop-description {
+  font-weight: 300;
+}
+.heading {
+  font-weight: 500;
+}
+span {
+  font-weight: 300;
+}
+.bookings {
+  height: 100px;
+  border: 1px solid #eee;
 }

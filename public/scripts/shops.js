@@ -16,15 +16,28 @@ const getAllShops = async (pinCode) => {
   }
 };
 
+const showAddress2 = (address) => {
+  return address ? `<span>${address},</span>` : '';
+};
+
 const allShopsInHTML = (shops) => {
   const shopsInHTML = shops.map((shop) => {
     return `<div class="shop">
     <div class="shop-title-bar">
-      <div class="shop-name">${shop.shop.name}</div>
-      <div class="shop-description">${shop.shop.description}</div>
+      <div class="shop-name">${shop.address.shop.name}</div>
+      <div class="shop-description">${shop.address.shop.description}</div>
     </div>
-
-    </div>`;
+    <div class="address">
+      <span class="heading">Address: </span>
+      <span>${shop.address.address1},</span>
+      ${showAddress2(shop.address.address2)}
+      <span>${shop.address.city},</span>
+      <span>${shop.address.district},</span>
+      <span>${shop.address.state},</span>
+      <span>${shop.address.pinCode}</span>
+    </div>
+    <div class="bookings">Here Should be all types of bookings</div>
+  </div>`;
   });
   return shopsInHTML.join('');
 };
