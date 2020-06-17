@@ -87,6 +87,12 @@ span {
   font-weight: 300;
 }
 .bookings {
-  height: 100px;
   border: 1px solid #eee;
+}
+.slot-status {
+  display: flex;
+  flex-wrap: wrap;
+}
+.slot-status > div {
+  padding: 4px 8px;
 }

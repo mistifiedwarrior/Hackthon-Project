@@ -20,6 +20,22 @@ const showAddress2 = (address) => {
   return address ? `<span>${address},</span>` : '';
 };
 
+const totalOpeningTime = ({ openingTime, closingTime } = {}) => {
+  const startTime = moment(openingTime, 'HH:mm');
+  const endTime = moment(closingTime, 'HH:mm');
+  const duration = moment.duration(endTime.diff(startTime));
+  return duration.asMinutes();
+};
+
+const allBookings = (shop) => {
+  const timeToOpen = totalOpeningTime(shop.timing);
+  const totalBookings = Math.floor(timeToOpen / shop.timing.bookingDuration);
+  let bookingString = '<div class="slot-status">';
+  for (let idx = 0; idx < totalBookings; idx++)
+    bookingString += `<div>${idx}</div>`;
+  return bookingString + '</div>';
+};
+
 const allShopsInHTML = (shops) => {
   const shopsInHTML = shops.map((shop) => {
     return `<div class="shop">
@@ -36,7 +52,9 @@ const allShopsInHTML = (shops) => {
       <span>${shop.address.state},</span>
       <span>${shop.address.pinCode}</span>
     </div>
-    <div class="bookings">Here Should be all types of bookings</div>
+    <div class="bookings"><span class="heading">Bookings: <span><br />
+      ${allBookings(shop)}
+    </div>
   </div>`;
   });
   return shopsInHTML.join('');
