@@ -76,7 +76,10 @@
   font-size: 18px;
   font-weight: 600;
   line-height: 20px;
+  color: #333;
+  text-decoration: none;
 }
+
 .shop-description {
   font-weight: 300;
 }

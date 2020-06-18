@@ -31,10 +31,25 @@ const serveAllShops = async (req, res) => {
   try {
     const pinCode = req.body.pinCode;
     const shops = await Shopkeeper.find({ 'address.pinCode': pinCode });
-    res.send(shops);
+    const shopsToServe = shops.map((shop) => ({
+      _id: shop._id,
+      address: shop.address,
+      bookings: shop.bookings,
+    }));
+    res.send(shopsToServe);
   } catch (error) {
     res.status(500).end();
   }
 };
 
-module.exports = { registerCustomer, loginCustomer, serveAllShops };
+const serveShop = async (req, res) => {
+  try {
+    const id = req.query.shop;
+    const shop = await Shopkeeper.findById(id);
+    res.send(shop.address);
+  } catch (error) {
+    res.status(500).end();
+  }
+};
+
+module.exports = { registerCustomer, loginCustomer, serveAllShops, serveShop };

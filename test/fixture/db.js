@@ -41,6 +41,7 @@ const shopkeeperOne = {
     state: 'Uttar Pradesh',
     city: 'Ayodhya',
     pinCode: 123456,
+    geoCode: {},
   },
 };
 

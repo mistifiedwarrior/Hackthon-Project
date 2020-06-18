@@ -4,7 +4,13 @@ const request = require('supertest');
 const { app } = require('../src/router');
 const { Shopkeeper } = require('../src/models/shopkeeper');
 
-const { customerOne, setupDatabase, cleanupDatabase } = require('./fixture/db');
+const {
+  customerOne,
+  shopkeeperOneId,
+  shopkeeperOne,
+  setupDatabase,
+  cleanupDatabase,
+} = require('./fixture/db');
 
 describe('Customer', () => {
   describe('static page', () => {
@@ -114,6 +120,27 @@ describe('Customer', () => {
       await request(app)
         .post('/customer/allShops')
         .send({ pinCode: 111111 })
+        .expect(500);
+      sinon.restore();
+    });
+  });
+
+  describe('Serve Shop', () => {
+    beforeEach(setupDatabase);
+    afterEach(cleanupDatabase);
+    it('should serve shop details', async () => {
+      const shops = await request(app)
+        .get(`/customer/shop?shop=${shopkeeperOneId}`)
+        .expect(200);
+      assert.deepStrictEqual(shops.body, shopkeeperOne.address);
+    });
+
+    it('should give 500 error if server is crashes', async () => {
+      sinon.replace(Shopkeeper, 'findById', () => {
+        throw new Error();
+      });
+      await request(app)
+        .get(`/customer/shop?shop=${shopkeeperOneId}`)
         .expect(500);
       sinon.restore();
     });
