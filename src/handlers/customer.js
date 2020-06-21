@@ -1,5 +1,6 @@
 const { Customer } = require('../models/customer');
 const { Shopkeeper } = require('../models/shopkeeper');
+const { getBookings } = require('./utilCustomer');
 
 const registerCustomer = async (req, res) => {
   try {
@@ -46,7 +47,9 @@ const serveShop = async (req, res) => {
   try {
     const id = req.query.shop;
     const shop = await Shopkeeper.findById(id);
-    res.send(shop.address);
+    const bookings = await getBookings(shop);
+    const { address, timing } = shop;
+    res.send({ address, timing, bookings });
   } catch (error) {
     res.status(500).end();
   }

@@ -43,6 +43,11 @@ const shopkeeperOne = {
     pinCode: 123456,
     geoCode: {},
   },
+  timing: {
+    openingTime: '09:00',
+    closingTime: '22:00',
+    bookingDuration: 30,
+  },
 };
 
 const shopkeeperTwoId = new mongoose.Types.ObjectId();

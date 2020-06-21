@@ -129,10 +129,10 @@ describe('Customer', () => {
     beforeEach(setupDatabase);
     afterEach(cleanupDatabase);
     it('should serve shop details', async () => {
-      const shops = await request(app)
+      const shop = await request(app)
         .get(`/customer/shop?shop=${shopkeeperOneId}`)
         .expect(200);
-      assert.deepStrictEqual(shops.body, shopkeeperOne.address);
+      assert.deepStrictEqual(shop.body.address, shopkeeperOne.address);
     });
 
     it('should give 500 error if server is crashes', async () => {
