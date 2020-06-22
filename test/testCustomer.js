@@ -98,17 +98,18 @@ describe('Customer', () => {
     beforeEach(setupDatabase);
     afterEach(cleanupDatabase);
     it('should serve all Shops in my area', async () => {
+      const date = new Date().toISOString().split('T')[0];
       const shops = await request(app)
         .post('/customer/allShops')
-        .send({ pinCode: 123456 })
+        .send({ search: 'ayodhya', date })
         .expect(200);
-      assert.strictEqual(shops.body.length, 1);
+      assert.deepStrictEqual(shops.body[0].address, shopkeeperOne.address);
     });
 
     it('should serve No Shops if no shop in that area my area', async () => {
       const shops = await request(app)
         .post('/customer/allShops')
-        .send({ pinCode: 111111 })
+        .send({ search: 'no location', date: '' })
         .expect(200);
       assert.strictEqual(shops.body.length, 0);
     });
@@ -119,7 +120,7 @@ describe('Customer', () => {
       });
       await request(app)
         .post('/customer/allShops')
-        .send({ pinCode: 111111 })
+        .send({ search: 'no where', date: 'date' })
         .expect(500);
       sinon.restore();
     });

@@ -1,101 +1,56 @@
-.main-content {
-  background: #eee;
-  font-family: sans-serif;
-}
-.title-bar {
-  background: #fff;
-  text-align: center;
-  font-size: 20px;
+.shops-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   padding: 8px;
+  background: #eee;
   border-bottom: 1px solid #aaa;
 }
-.container {
-  display: flex;
+.search {
+  width: 25%;
 }
-.left-sidebar {
-  margin: 8px 4px 8px 8px;
-  background: #fff;
-  width: 20%;
-}
-.left-sidebar > div {
-  padding: 8px;
-  border-bottom: 1px solid #eee;
-}
-.sidebar-title {
-  font-size: 18px;
-}
-.area-pin {
-  margin: 4px 0;
+.search form {
+  border: 1px solid #333;
   display: flex;
   justify-content: space-between;
 }
-.area-pin input {
-  width: 65%;
-  outline: none;
-  padding: 2px 4px;
-  border-radius: 0;
-  border: 1px solid #333;
-}
-.area-pin > button {
-  width: 30%;
-}
-.search-bar button {
-  padding: 4px;
-  border: 2px solid #0c4da2;
-  border-radius: 4px;
-  background-color: #0c4da2;
-  color: #fff;
-  cursor: pointer;
-}
-.search-bar button:hover {
-  background: #063b80;
-}
-.location > button {
-  width: 100%;
-}
-
-.shops {
-  margin: 8px 8px 8px 4px;
+.search input {
+  outline: 0;
+  border: 0;
   width: 80%;
-  background: #fff;
-}
-.all-shops > div {
-  padding: 8px;
-  border-bottom: 1px solid #eee;
-}
-.no-shop {
-  font-size: 24px;
-  text-align: center;
-  align-items: center;
-}
-.shop {
-  display: flex;
-  flex-direction: column;
-}
-.shop-name {
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 20px;
-  color: #333;
-  text-decoration: none;
-}
-
-.shop-description {
-  font-weight: 300;
-}
-.heading {
-  font-weight: 500;
-}
-span {
-  font-weight: 300;
-}
-.bookings {
-  border: 1px solid #eee;
-}
-.slot-status {
-  display: flex;
-  flex-wrap: wrap;
-}
-.slot-status > div {
+  font-size: 16px;
   padding: 4px 8px;
+}
+button {
+  height: 100%;
+  font-size: 16px;
+  padding: 4px 8px;
+  background: #0c4da2;
+  border: 1px solid #333;
+  color: #fff;
+  font-family: sans-serif;
+  font-weight: 200;
+}
+.search button {
+  width: 20%;
+}
+.search-by-geo-location button {
+  border-radius: 4px;
+  padding: 4px 16px;
+}
+.sort select {
+  outline: none;
+  padding: 4px 8px;
+  font-size: 16px;
+}
+.sort option {
+  background: red;
+}
+.date input {
+  outline: none;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.shops {
+  padding: 8px;
 }

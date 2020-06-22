@@ -20,31 +20,42 @@
   <body>
     <div class="navbar"></div>
     <div class="main-content">
-      <div class="title-bar">Shops</div>
-      <div class="container">
-        <div class="search-options left-sidebar">
-          <div class="sidebar-title">Filters</div>
-          <div class="search-bar">
-            <div class="title">Search By Locations</div>
-            <form class="area-pin">
-              <input
-                type="number"
-                id="pin-code"
-                max="999999"
-                required
-                placeholder="Enter area pin..."
-              />
-              <button>Search</button>
-            </form>
-            <div class="location"><button>Use My current Location</button></div>
-          </div>
+      <div class="shops-header">
+        <div class="search">
+          <form>
+            <input
+              type="text"
+              id="search"
+              placeholder="Search by name or location..."
+            />
+            <button><i class="fa fa-search"></i></button>
+          </form>
         </div>
-
-        <div class="shops">
-          <div class="shops-title-bar"></div>
-          <div class="all-shops">
-            <div class="no-shop">No shop found...</div>
-          </div>
+        <div class="search-by-geo-location">
+          <button>Use my current location</button>
+        </div>
+        <div class="sort">
+          <form>
+            <label for="cars">Sort: </label>
+            <select name="cars" id="cars">
+              <option selected>select</option>
+              <option value="volvo">VolvoVolvoVolvoVolvo</option>
+              <option value="saab">Saab</option>
+              <option value="opel">Opel</option>
+              <option value="audi">Audi</option>
+            </select>
+          </form>
+        </div>
+        <div class="date">
+          <form>
+            <label for="date">Date: </label>
+            <input type="date" id="date" />
+          </form>
+        </div>
+      </div>
+      <div class="shops">
+        <div>
+          Please login your account or search shops by using current location...
         </div>
       </div>
     </div>

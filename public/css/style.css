@@ -12,7 +12,9 @@ a {
 a:hover {
   color: #00f;
 }
-
+button {
+  cursor: pointer;
+}
 .main-content {
   display: flex;
   flex-direction: column;

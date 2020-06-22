@@ -1,6 +1,7 @@
 const { Customer } = require('../models/customer');
 const { Shopkeeper } = require('../models/shopkeeper');
-const { getBookings } = require('./utilCustomer');
+const { getBookings } = require('./initBookings');
+const { getOrQuery, filterDetailsToServe } = require('./utilCustomer');
 
 const registerCustomer = async (req, res) => {
   try {
@@ -30,13 +31,10 @@ const loginCustomer = async (req, res) => {
 
 const serveAllShops = async (req, res) => {
   try {
-    const pinCode = req.body.pinCode;
-    const shops = await Shopkeeper.find({ 'address.pinCode': pinCode });
-    const shopsToServe = shops.map((shop) => ({
-      _id: shop._id,
-      address: shop.address,
-      bookings: shop.bookings,
-    }));
+    const { search, date } = req.body;
+    const query = getOrQuery(search);
+    const shops = await Shopkeeper.find(query);
+    const shopsToServe = await filterDetailsToServe(shops, date);
     res.send(shopsToServe);
   } catch (error) {
     res.status(500).end();

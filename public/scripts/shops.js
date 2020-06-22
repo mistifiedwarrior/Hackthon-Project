@@ -6,14 +6,10 @@ const getOptions = (body, method = 'POST') => {
   };
 };
 
-const getAllShops = async (pinCode) => {
-  try {
-    const res = await fetch('/customer/allShops', getOptions({ pinCode }));
-    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    return await res.json();
-  } catch (error) {
-    console.error(error);
-  }
+const getAllShops = async (search) => {
+  const res = await fetch('/customer/allShops', getOptions(search));
+  if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+  return await res.json();
 };
 
 const showAddress2 = (address) => {
@@ -25,13 +21,12 @@ const renderBookingsStatus = (bookings) => {
   return 'here are some other bookings';
 };
 
-const allShopsInHTML = (shops) => {
+const renderShops = (shops) => {
   const shopsInHTML = shops.map((shop) => {
     return `<div class="shop">
     <div class="shop-title-bar">
-      <a class="shop-name" href="/shop.html?shop=${shop._id}">${
-      shop.address.shop.name
-    }</a>
+      <a class="shop-name" href="/shop.html?shop=${shop._id}">
+      ${shop.address.shop.name}</a>
       <div class="shop-description">${shop.address.shop.description}</div>
     </div>
     <div class="address">
@@ -48,50 +43,49 @@ const allShopsInHTML = (shops) => {
     </div>
   </div>`;
   });
-  return shopsInHTML.join('');
+  getElement('.shops').innerHTML = shopsInHTML.join('');
 };
 
-const renderShops = async ({ address } = {}) => {
-  const $allShops = getElement('.shops .all-shops');
-  if (!address) {
-    const htmlText = `<div>Please search shops by area pin code or by your location given in left side options<br />
-    Or your can search shops by login, If you are already logged in, please update your address 
-    <a href="/account.html">Update Address</a><br /></div>`;
-    $allShops.innerHTML += htmlText;
-    return;
-  }
-  const shops = await getAllShops(address.pinCode);
-  let allShops = '<h1 style="text-align:center;">No Shops is in Your area</h1>';
-  if (shops.length) {
-    allShops = allShopsInHTML(shops);
-  }
-  $allShops.innerHTML = allShops;
+const renderDate = () => {
+  const date = moment(new Date()).format('YYYY-MM-DD');
+  getElement('.date form #date').value = date;
 };
 
-const updateFilterInputField = ({ address } = {}) => {
-  getElement('.area-pin #pin-code').value = address ? address.pinCode : '';
-};
-
-const fetchAndRenderShopByCurrentLocations = () => {};
+const fetchAndRenderShopOfCurrentLocations = () => {};
 
 const fetchAndRenderShops = async (event) => {
-  event.preventDefault();
-  const pinCode = +getElement('.area-pin #pin-code').value;
-  await renderShops({ address: { pinCode } });
-  getElement('.area-pin #pin-code').value = '';
+  try {
+    event.preventDefault();
+    const search = getElement('#search').value;
+    const date = getElement('#date').value;
+    const shops = await getAllShops({ search, date });
+    renderShops(shops);
+  } catch (error) {
+    console.error('No shops found...');
+  }
 };
 
-const listenerOnSearchShops = () => {
-  getElement('.area-pin').addEventListener('submit', fetchAndRenderShops);
-  const $location = getElement('.location button');
-  $location.addEventListener('click', fetchAndRenderShopByCurrentLocations);
+const initRenderShops = async (address) => {
+  try {
+    const date = moment(new Date()).format('YYYY-MM-DD');
+    const shops = await getAllShops({ search: address.city, date });
+    renderShops(shops);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const listenerOnSearch = () => {
+  getElement('.search form').addEventListener('submit', fetchAndRenderShops);
+  const $location = getElement('.search-by-geo-location button');
+  $location.addEventListener('click', fetchAndRenderShopOfCurrentLocations);
 };
 
 const main = async () => {
   const myData = await loadPartialHTML();
-  updateFilterInputField(myData.address);
-  listenerOnSearchShops();
-  await renderShops(myData);
+  renderDate();
+  listenerOnSearch();
+  await initRenderShops(myData.address);
 };
 
 window.onload = main;
