@@ -26,10 +26,10 @@ const fetchAndRenderShops = async (event) => {
   }
 };
 
-const initRenderShops = async (address) => {
+const initRenderShops = async (address = {}) => {
   try {
     const date = moment(new Date()).format('YYYY-MM-DD');
-    const shops = await getAllShops({ search: address.city, date });
+    const shops = await getAllShops({ search: address.city || '', date });
     renderShops(shops);
   } catch (error) {
     console.error(error);
@@ -46,7 +46,7 @@ const main = async () => {
   const myData = await loadPartialHTML();
   renderDate();
   listenerOnSearch();
-  await initRenderShops(myData.address);
+  await initRenderShops(myData && myData.address);
 };
 
 window.onload = main;
