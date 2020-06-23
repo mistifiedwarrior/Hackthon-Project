@@ -21,20 +21,9 @@ const fetchAndRenderShops = async (event) => {
     const date = getElement('#date').value;
     const shops = await getAllShops({ search, date });
     renderShops(shops);
+    listenerOnBookings();
   } catch (error) {
     console.error('No shops found...');
-  }
-};
-
-const initRenderShops = async (address = {}) => {
-  try {
-    const date = moment(new Date()).format('YYYY-MM-DD');
-    const search = address.city || '';
-    renderInputFields(search, date);
-    const shops = await getAllShops({ search, date });
-    renderShops(shops);
-  } catch (error) {
-    console.error(error);
   }
 };
 
@@ -49,17 +38,18 @@ const listenerOnBookings = () => {
   const bookings = getAllElement('.bookings span');
   bookings.forEach((button) => {
     button.addEventListener('click', () => {
-      const id = button.parentElement.parentElement.parentElement.title;
-      window.location.href = `/shop.html?shop=${id}`;
+      const id = button.parentElement.parentElement.parentElement.id;
+      const date = getElement('.date #date').value;
+      window.location.href = `/shop.html?shop=${id}&date=${date}`;
     });
   });
 };
 
-const main = async () => {
+const main = async (event) => {
   const myData = await loadPartialHTML();
   listenerOnSearch();
-  await initRenderShops(myData && myData.address);
-  listenerOnBookings();
+  initInputFields(myData && myData.address);
+  await fetchAndRenderShops(event);
 };
 
 window.onload = main;

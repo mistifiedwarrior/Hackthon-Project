@@ -26,7 +26,7 @@ const shopkeeperSchema = new mongoose.Schema({
     closingTime: { type: String },
     slots: { type: Number },
     bookingDuration: { type: Number },
-    bookBefore: { type: String },
+    bookBefore: { type: Number },
   },
   allBookings: [
     {

@@ -47,6 +47,7 @@ const shopkeeperOne = {
     openingTime: '09:00',
     closingTime: '22:00',
     bookingDuration: 30,
+    bookBefore: 4,
   },
 };
 

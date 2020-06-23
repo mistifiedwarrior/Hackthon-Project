@@ -16,12 +16,23 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <script src="./scripts/loadNavbarAndFooter.js"></script>
+    <script src="./scripts/scroll.js"></script>
     <script src="./scripts/renderShop.js"></script>
-    <script src="./scripts/bookSlot.js"></script>
+    <script src="./scripts/shop.js"></script>
   </head>
   <body>
     <div class="navbar"></div>
-    <div class="main-content"></div>
+    <div class="main-content">
+      <div class="shops-header">
+        <div class="date">
+          <form>
+            <label for="date">Date: </label>
+            <input type="date" id="date" />
+          </form>
+        </div>
+      </div>
+      <div class="shops"></div>
+    </div>
     <div class="footer"></div>
   </body>
 </html>

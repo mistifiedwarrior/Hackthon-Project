@@ -1,9 +1,16 @@
-const renderInputFields = (search, date) => {
-  getElement('.date form #date').value = date;
-  getElement('.date form #date').min = date;
-  const maxLimit = moment(new Date()).add(7, 'days').format('YYYY-MM-DD');
-  getElement('.date form #date').max = maxLimit;
-  getElement('.search form #search').value = search;
+const formatDate = (date) => date.format('YYYY-MM-DD');
+
+const renderDate = (date, maxLimit = 7) => {
+  const dateToRender = formatDate(moment(date));
+  getElement('.date form #date').value = dateToRender;
+  getElement('.date form #date').min = formatDate(moment());
+  const maxLimitDate = moment().add(maxLimit, 'days');
+  getElement('.date form #date').max = formatDate(maxLimitDate);
+};
+
+const initInputFields = ({ city = '' } = {}) => {
+  getElement('.search form #search').value = city;
+  renderDate();
 };
 
 const showAddress2 = (address) => {
@@ -21,17 +28,17 @@ const bookingStatus = ({ bookedBy, time }, slots) => {
   return timeInHTML + statusInHTML;
 };
 
-const renderBookings = (bookings, timing) => {
-  const bookingInHTML = bookings.bookings.map((booking) => {
-    return `<div class="booking-status"> 
-    ${bookingStatus(booking, timing.slots)}</div>`;
-  });
-  const dateInHTML = `<div class="date">
-    <div>Booking Status: </div>
-    <div>${moment(bookings.date).format('MMM DD, YYYY')}</div>
-  </div>`;
-  return `${dateInHTML}<div class="all-bookings">
-  ${bookingInHTML.join('')}</div>`;
+const renderBookings = ({ bookings, date }, timing) => {
+  const dateToShow = moment(date).format('MMM DD, YYYY');
+  let bookingInHTML = `<div class="no-booking occupied">Booking is not available on ${dateToShow}</div>`;
+  if (bookings.length) {
+    bookingInHTML = bookings.reduce((allBookings, booking) => {
+      return `${allBookings}<div class="booking-status"> 
+              ${bookingStatus(booking, timing.slots)}</div>`;
+    }, '');
+  }
+  const dateInHTML = `<div class="date"><div>Booking Status:</div><div>${dateToShow}</div></div>`;
+  return `${dateInHTML}<div class="all-bookings">${bookingInHTML}</div>`;
 };
 
 const shopInHtml = ({ _id, address, bookings, timing }) => {
@@ -51,13 +58,12 @@ const shopInHtml = ({ _id, address, bookings, timing }) => {
       <span>${address.state},</span>
       <span>${address.pinCode}</span>
     </div>
-    <div class="bookings" title="${_id}">
-      ${renderBookings(bookings, timing)}</div>
+    <div class="bookings" id="${_id}">${renderBookings(bookings, timing)}</div>
   </div>`;
 };
 
 const renderShop = (shop) => {
-  getElement('.main-content').innerHTML = shopInHtml(shop);
+  getElement('.shops').innerHTML = shopInHtml(shop);
 };
 
 const renderShops = (shops) => {

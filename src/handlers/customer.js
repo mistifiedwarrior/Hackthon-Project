@@ -43,9 +43,9 @@ const serveAllShops = async (req, res) => {
 
 const serveShop = async (req, res) => {
   try {
-    const id = req.query.shop;
+    const { shop: id, date } = req.query;
     const shop = await Shopkeeper.findById(id);
-    const bookings = await getBookings(shop);
+    const bookings = await getBookings(shop, date);
     const { _id, address, timing } = shop;
     res.send({ _id, address, timing, bookings });
   } catch (error) {

@@ -19,14 +19,23 @@ const fetchAndRenderShop = async () => {
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const shop = await res.json();
     renderShop(shop);
+    renderDate(shop.bookings.date, shop.timing.bookBefore);
   } catch (error) {
     console.error(error);
   }
 };
 
+const listenerOnDate = () => {
+  getElement('.date #date').addEventListener('input', () => {
+    const date = getElement('#date').value;
+    window.location.href = window.location.href.slice(0, -10) + date;
+  });
+};
+
 const main = async () => {
   await loadPartialHTML();
   await fetchAndRenderShop();
+  listenerOnDate();
 };
 
 window.onload = main;

@@ -119,6 +119,10 @@ button {
   text-decoration: none;
   font-weight: 600;
 }
+.shop-name a:hover {
+  color: #0c4da2;
+}
+
 .shop-description {
   font-weight: 300;
   font-size: 14px;
@@ -143,6 +147,7 @@ button {
   justify-content: flex-start;
   max-height: 160px;
   overflow-y: scroll;
+  border: 1px solid #eee;
 }
 .booking-status {
   margin: 0 auto;

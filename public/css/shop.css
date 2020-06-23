@@ -1,69 +1,14 @@
-.all-bookings {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+.shops-header {
+  justify-content: flex-end;
 }
-
-.booking-status {
-  margin: 0 auto;
-  display: flex;
-  margin: 2px;
-  border: 1px solid #333;
-  position: relative;
-  min-width: 96px;
+.shop-name a {
+  pointer-events: none;
 }
-.booking-status > span {
-  line-height: 32px;
+.no-booking {
   text-align: center;
-  position: absolute;
-  width: 100%;
-}
-.booking-status > div {
+  margin: 20px auto;
+  padding: 20px;
+  font-size: 24px;
+  color: red;
   opacity: 0.5;
-  cursor: pointer;
-  width: 20px;
-  height: 32px;
-}
-.booking-status > .available {
-  background: green;
-}
-.booking-status > .occupied {
-  background: red;
-  cursor: default;
-}
-.slots-1 {
-  min-width: 96px;
-}
-.slots-2 {
-  min-width: 48px;
-}
-.slots-3 {
-  min-width: 32px;
-}
-.slots-4 {
-  min-width: 24px;
-}
-@media (max-width: 420px) {
-  .booking-status > span {
-    line-height: 20px;
-  }
-  .booking-status > div {
-    width: 15px;
-    height: 20px;
-  }
-  .booking-status {
-    min-width: 72px;
-  }
-  .slots-1 {
-    min-width: 72px;
-  }
-  .slots-2 {
-    min-width: 36px;
-  }
-  .slots-3 {
-    min-width: 24px;
-  }
-  .slots-4 {
-    min-width: 18px;
-  }
 }

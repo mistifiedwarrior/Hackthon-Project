@@ -99,10 +99,9 @@ describe('Customer', () => {
     beforeEach(setupDatabase);
     afterEach(cleanupDatabase);
     it('should serve all Shops in my area', async () => {
-      const date = new Date().toISOString().split('T')[0];
       const shops = await request(app)
         .post('/customer/allShops')
-        .send({ search: 'ayodhya', date })
+        .send({ search: 'ayodhya', date: moment().add(1, 'days') })
         .expect(200);
       assert.deepStrictEqual(shops.body[0].address, shopkeeperOne.address);
     });
