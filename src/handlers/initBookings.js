@@ -14,9 +14,11 @@ const initSlots = ({ openingTime, closingTime, bookingDuration } = {}) => {
 };
 
 const isValidBooking = (bookBefore, date) => {
-  const dateForBooking = moment(date);
-  const ValidFor = moment(new Date()).add(bookBefore, 'days');
-  return moment(dateForBooking).isBetween(moment(), ValidFor);
+  const format = (date) => moment(date).format('YYYY-MM-DD');
+  const today = format(moment());
+  const dateForBooking = format(date);
+  const ValidFor = format(moment().add(bookBefore, 'days'));
+  return moment(dateForBooking).isBetween(today, ValidFor, undefined, '[]');
 };
 
 const initBooking = async (shop, date) => {
