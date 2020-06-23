@@ -15,6 +15,9 @@ a:hover {
 button {
   cursor: pointer;
 }
+.navbar {
+  z-index: 0;
+}
 .main-content {
   display: flex;
   flex-direction: column;
