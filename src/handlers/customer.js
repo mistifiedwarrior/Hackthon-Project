@@ -46,8 +46,8 @@ const serveShop = async (req, res) => {
     const id = req.query.shop;
     const shop = await Shopkeeper.findById(id);
     const bookings = await getBookings(shop);
-    const { address, timing } = shop;
-    res.send({ address, timing, bookings });
+    const { _id, address, timing } = shop;
+    res.send({ _id, address, timing, bookings });
   } catch (error) {
     res.status(500).end();
   }

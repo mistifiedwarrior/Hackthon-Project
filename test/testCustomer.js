@@ -1,4 +1,5 @@
 const sinon = require('sinon');
+const moment = require('moment');
 const { assert } = require('chai');
 const request = require('supertest');
 const { app } = require('../src/router');
@@ -112,6 +113,16 @@ describe('Customer', () => {
         .send({ search: 'no location', date: '' })
         .expect(200);
       assert.strictEqual(shops.body.length, 0);
+    });
+
+    it('should serve No Shops booking date is not valid beyond the limit', async () => {
+      const date = new Date().toISOString().split('T')[0];
+      const dateToFind = moment(date, 'YYYY-MM-DD').add(10, 'days');
+      const shops = await request(app)
+        .post('/customer/allShops')
+        .send({ search: 'ayodhya', date: dateToFind.format('YYYY-MM-DD') })
+        .expect(200);
+      assert.deepStrictEqual(shops.body[0].bookings, {});
     });
 
     it('should give 500 error if server is crashes', async () => {

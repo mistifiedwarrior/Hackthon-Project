@@ -17,13 +17,13 @@ const getOrQuery = ($regex) => {
 const filterDetailsToServe = (shops, date) => {
   return Promise.all(
     shops.map(async (shop) => {
-      const { _id, address, allBookings } = shop;
+      const { _id, address, allBookings, timing } = shop;
       const bookings = allBookings.filter((booking) => booking.date === date);
       if (bookings.length === 0) {
-        const booking = await getBookings(shop);
+        const booking = await getBookings(shop, date);
         bookings.push(booking);
       }
-      return { bookings: bookings[0], _id, address };
+      return { bookings: bookings[0], _id, address, timing };
     })
   );
 };

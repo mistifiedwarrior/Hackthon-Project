@@ -12,45 +12,6 @@ const getAllShops = async (search) => {
   return await res.json();
 };
 
-const showAddress2 = (address) => {
-  return address ? `<span>${address},</span>` : '';
-};
-
-const renderBookingsStatus = (bookings) => {
-  if (!bookings) return '';
-  return 'here are some other bookings';
-};
-
-const renderShops = (shops) => {
-  const shopsInHTML = shops.map((shop) => {
-    return `<div class="shop">
-    <div class="shop-title-bar">
-      <a class="shop-name" href="/shop.html?shop=${shop._id}">
-      ${shop.address.shop.name}</a>
-      <div class="shop-description">${shop.address.shop.description}</div>
-    </div>
-    <div class="address">
-      <span class="heading">Address: </span>
-      <span>${shop.address.address1},</span>
-      ${showAddress2(shop.address.address2)}
-      <span>${shop.address.city},</span>
-      <span>${shop.address.district},</span>
-      <span>${shop.address.state},</span>
-      <span>${shop.address.pinCode}</span>
-    </div>
-    <div class="bookings"><span class="heading">Bookings: <span><br />
-      ${renderBookingsStatus(shop.bookings)}
-    </div>
-  </div>`;
-  });
-  getElement('.shops').innerHTML = shopsInHTML.join('');
-};
-
-const renderDate = () => {
-  const date = moment(new Date()).format('YYYY-MM-DD');
-  getElement('.date form #date').value = date;
-};
-
 const fetchAndRenderShopOfCurrentLocations = () => {};
 
 const fetchAndRenderShops = async (event) => {
