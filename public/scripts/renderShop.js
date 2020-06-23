@@ -61,8 +61,11 @@ const renderShop = (shop) => {
 };
 
 const renderShops = (shops) => {
-  const shopsInHTML = shops.map((shop) => {
-    return shopInHtml(shop);
-  });
+  let shopsInHTML = ['<div class="no-shops">No Shops Found...</div>'];
+  if (shops.length) {
+    shopsInHTML = shops.map((shop) => {
+      return shopInHtml(shop);
+    });
+  }
   getElement('.shops').innerHTML = shopsInHTML.join('');
 };

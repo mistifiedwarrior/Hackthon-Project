@@ -104,6 +104,11 @@ button {
 }
 
 /* shop  */
+.no-shops {
+  font-size: 24px;
+  text-align: center;
+  padding: 20px 0;
+}
 .shop {
   padding: 8px;
   border-bottom: 2px solid #aaa;

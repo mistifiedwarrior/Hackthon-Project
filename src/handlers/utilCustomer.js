@@ -26,7 +26,9 @@ const filterDetailsToServe = async (shops, date) => {
       return { bookings: bookings[0], _id, address, timing };
     })
   );
-  return shopsDetails.filter((shop) => shop.bookings);
+  return shopsDetails.filter(
+    ({ bookings } = {}) => bookings.bookings && bookings.bookings.length
+  );
 };
 
 module.exports = { getOrQuery, filterDetailsToServe };

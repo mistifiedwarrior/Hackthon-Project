@@ -122,7 +122,7 @@ describe('Customer', () => {
         .post('/customer/allShops')
         .send({ search: 'ayodhya', date: dateToFind.format('YYYY-MM-DD') })
         .expect(200);
-      assert.deepStrictEqual(shops.body[0].bookings, {});
+      assert.deepStrictEqual(shops.body, []);
     });
 
     it('should give 500 error if server is crashes', async () => {
