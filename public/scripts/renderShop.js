@@ -14,7 +14,7 @@ const bookingStatus = ({ bookedBy, time }, slots) => {
     if (slots - bookedBy.length < index) className = 'occupied';
     statusInHTML += `<div class="${className} slots-${slots}"></div>`;
   }
-  const timeInHTML = `<span>${moment(time, 'HH:mm').format('hh:mm A')}</span>`;
+  const timeInHTML = `<span>${moment(time, 'HH:mm').format('hh:mm a')}</span>`;
   return timeInHTML + statusInHTML;
 };
 
