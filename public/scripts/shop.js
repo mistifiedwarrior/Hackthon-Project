@@ -28,7 +28,8 @@ const fetchAndRenderShop = async () => {
 const listenerOnDate = () => {
   getElement('.date #date').addEventListener('input', () => {
     const date = getElement('#date').value;
-    window.location.href = window.location.href.slice(0, -10) + date;
+    const id = getElement('.bookings').id;
+    window.location.href = `/shop.html?shop=${id}&date=${date}`;
   });
 };
 
