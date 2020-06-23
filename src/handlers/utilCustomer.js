@@ -14,8 +14,8 @@ const getOrQuery = ($regex) => {
   };
 };
 
-const filterDetailsToServe = (shops, date) => {
-  return Promise.all(
+const filterDetailsToServe = async (shops, date) => {
+  const shopsDetails = await Promise.all(
     shops.map(async (shop) => {
       const { _id, address, allBookings, timing } = shop;
       const bookings = allBookings.filter((booking) => booking.date === date);
@@ -26,6 +26,7 @@ const filterDetailsToServe = (shops, date) => {
       return { bookings: bookings[0], _id, address, timing };
     })
   );
+  return shopsDetails.filter((shop) => shop.bookings);
 };
 
 module.exports = { getOrQuery, filterDetailsToServe };

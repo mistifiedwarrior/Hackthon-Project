@@ -136,6 +136,8 @@ button {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  max-height: 160px;
+  overflow-y: scroll;
 }
 .booking-status {
   margin: 0 auto;
@@ -152,10 +154,11 @@ button {
   width: 100%;
   font-family: sans-serif;
   font-weight: 100;
+  cursor: pointer;
 }
 .booking-status > div {
+  pointer-events: none;
   opacity: 0.5;
-  cursor: pointer;
   width: 15px;
   height: 24px;
 }

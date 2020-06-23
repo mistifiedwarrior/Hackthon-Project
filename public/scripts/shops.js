@@ -29,7 +29,9 @@ const fetchAndRenderShops = async (event) => {
 const initRenderShops = async (address = {}) => {
   try {
     const date = moment(new Date()).format('YYYY-MM-DD');
-    const shops = await getAllShops({ search: address.city || '', date });
+    const search = address.city || '';
+    renderInputFields(search, date);
+    const shops = await getAllShops({ search, date });
     renderShops(shops);
   } catch (error) {
     console.error(error);
@@ -38,15 +40,26 @@ const initRenderShops = async (address = {}) => {
 
 const listenerOnSearch = () => {
   getElement('.search form').addEventListener('submit', fetchAndRenderShops);
+  getElement('.date #date').addEventListener('input', fetchAndRenderShops);
   const $location = getElement('.search-by-geo-location button');
   $location.addEventListener('click', fetchAndRenderShopOfCurrentLocations);
 };
 
+const listenerOnBookings = () => {
+  const bookings = getAllElement('.bookings span');
+  bookings.forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.parentElement.parentElement.parentElement.title;
+      window.location.href = `/shop.html?shop=${id}`;
+    });
+  });
+};
+
 const main = async () => {
   const myData = await loadPartialHTML();
-  renderDate();
   listenerOnSearch();
   await initRenderShops(myData && myData.address);
+  listenerOnBookings();
 };
 
 window.onload = main;

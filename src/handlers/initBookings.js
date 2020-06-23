@@ -26,7 +26,6 @@ const initBooking = async (shop, date) => {
   const initBooking = { date };
   initBooking.bookings = initSlots(shop.timing);
   shop.allBookings.unshift(initBooking);
-  shop.allBookings.sort((booking1, booking2) => booking1.date - booking2.date);
   await shop.save();
   return initBooking;
 };

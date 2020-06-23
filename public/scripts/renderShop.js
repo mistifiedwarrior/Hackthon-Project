@@ -1,6 +1,9 @@
-const renderDate = () => {
-  const date = moment(new Date()).format('YYYY-MM-DD');
+const renderInputFields = (search, date) => {
   getElement('.date form #date').value = date;
+  getElement('.date form #date').min = date;
+  const maxLimit = moment(new Date()).add(7, 'days').format('YYYY-MM-DD');
+  getElement('.date form #date').max = maxLimit;
+  getElement('.search form #search').value = search;
 };
 
 const showAddress2 = (address) => {
@@ -48,7 +51,8 @@ const shopInHtml = ({ _id, address, bookings, timing }) => {
       <span>${address.state},</span>
       <span>${address.pinCode}</span>
     </div>
-    <div class="bookings">${renderBookings(bookings, timing)}</div>
+    <div class="bookings" title="${_id}">
+      ${renderBookings(bookings, timing)}</div>
   </div>`;
 };
 
