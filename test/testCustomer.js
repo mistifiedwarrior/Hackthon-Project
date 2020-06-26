@@ -115,8 +115,7 @@ describe('Customer', () => {
     });
 
     it('should serve No Shops booking date is not valid beyond the limit', async () => {
-      const date = new Date().toISOString().split('T')[0];
-      const dateToFind = moment(date, 'YYYY-MM-DD').add(10, 'days');
+      const dateToFind = moment().add(10, 'days');
       const shops = await request(app)
         .post('/customer/allShops')
         .send({ search: 'ayodhya', date: dateToFind.format('YYYY-MM-DD') })
@@ -152,6 +151,23 @@ describe('Customer', () => {
       });
       await request(app)
         .get(`/customer/shop?shop=${shopkeeperOneId}`)
+        .expect(500);
+      sinon.restore();
+    });
+  });
+
+  describe('Book Slot', () => {
+    beforeEach(setupDatabase);
+    afterEach(cleanupDatabase);
+
+    it('should give 500 error if server is crashes', async () => {
+      sinon.replace(Shopkeeper, 'findById', () => {
+        throw new Error();
+      });
+      await request(app)
+        .post('/customer/bookSlot')
+        .send({ shopId: '123' })
+        .set('Cookie', `customer=${customerOne.tokens[0].token}`)
         .expect(500);
       sinon.restore();
     });

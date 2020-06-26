@@ -17,15 +17,29 @@ const showAddress2 = (address) => {
   return address ? `<span>${address},</span>` : '';
 };
 
+const isThisMySlot = (bookedList) => {
+  return bookedList.some((bookedItem) => {
+    return bookedItem.customerId === getElement('#profile').myId;
+  });
+};
+
+const getClassName = function (slots, bookedBy, index) {
+  let className = 'available';
+  if (bookedBy.length > index) className = 'occupied';
+  if (!index && isThisMySlot(bookedBy)) {
+    className = 'occupied-by-me';
+  }
+  return className;
+};
+
 const bookingStatus = ({ bookedBy, time }, slots) => {
   let statusInHTML = '';
   for (let index = 0; index < slots; index++) {
-    let className = 'available';
-    if (slots - bookedBy.length < index) className = 'occupied';
+    const className = getClassName(slots, bookedBy, index);
     statusInHTML += `<div class="${className} slots-${slots}"></div>`;
   }
   const timeInHTML = `<span>${moment(time, 'HH:mm').format('hh:mm a')}</span>`;
-  return timeInHTML + statusInHTML;
+  return statusInHTML + timeInHTML;
 };
 
 const renderBookings = ({ bookings, date }, timing) => {
@@ -69,9 +83,7 @@ const renderShop = (shop) => {
 const renderShops = (shops) => {
   let shopsInHTML = ['<div class="no-shops">No Shops Found...</div>'];
   if (shops.length) {
-    shopsInHTML = shops.map((shop) => {
-      return shopInHtml(shop);
-    });
+    shopsInHTML = shops.map((shop) => shopInHtml(shop));
   }
   getElement('.shops').innerHTML = shopsInHTML.join('');
 };

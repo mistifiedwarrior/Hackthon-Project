@@ -34,7 +34,14 @@ const shopkeeperSchema = new mongoose.Schema({
       bookings: [
         {
           time: { type: String },
-          bookedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Customer' }],
+          bookedBy: [
+            {
+              customerId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Customer',
+              },
+            },
+          ],
         },
       ],
     },

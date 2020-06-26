@@ -31,4 +31,16 @@ const filterDetailsToServe = async (shops, date) => {
   );
 };
 
-module.exports = { getOrQuery, filterDetailsToServe };
+const updateBooking = function (allBookings, date, time, customerId) {
+  const { bookings } = allBookings.find((booking) => booking.date === date);
+  const { bookedBy } = bookings.find((booking) => booking.time === time);
+  const isAlreadyBookedByMe = bookedBy.find((bookedStatus) => {
+    return bookedStatus.customerId.equals(customerId);
+  });
+  if (isAlreadyBookedByMe) {
+    throw new Error();
+  }
+  bookedBy.push({ customerId });
+};
+
+module.exports = { getOrQuery, filterDetailsToServe, updateBooking };

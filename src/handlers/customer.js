@@ -1,7 +1,12 @@
 const { Customer } = require('../models/customer');
 const { Shopkeeper } = require('../models/shopkeeper');
 const { getBookings } = require('./initBookings');
-const { getOrQuery, filterDetailsToServe } = require('./utilCustomer');
+
+const {
+  getOrQuery,
+  filterDetailsToServe,
+  updateBooking,
+} = require('./utilCustomer');
 
 const registerCustomer = async (req, res) => {
   try {
@@ -53,4 +58,23 @@ const serveShop = async (req, res) => {
   }
 };
 
-module.exports = { registerCustomer, loginCustomer, serveAllShops, serveShop };
+const bookSlot = async (req, res) => {
+  try {
+    const { date, time, shopId } = req.body;
+    const customerId = req.customer._id;
+    const shop = await Shopkeeper.findById(shopId);
+    updateBooking(shop.allBookings, date, time, customerId);
+    await shop.save();
+    res.send({ status: true });
+  } catch (error) {
+    res.status(500).end();
+  }
+};
+
+module.exports = {
+  registerCustomer,
+  loginCustomer,
+  serveAllShops,
+  serveShop,
+  bookSlot,
+};

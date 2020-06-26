@@ -29,6 +29,7 @@ const renderProfile = async () => {
     const myData = await res.json();
     const $profile = getElement('#profile');
     $profile.innerHTML = `<a href="profile/${myData._id}">${myData.name}</a>`;
+    $profile.myId = myData._id;
     return myData;
   } catch (error) {
     // console.error(error);

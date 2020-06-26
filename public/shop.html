@@ -32,6 +32,58 @@
         </div>
       </div>
       <div class="shops"></div>
+
+      <div class="modals hidden">
+        <div id="login-modal" class="hidden">
+          <div class="modal-content">
+            <div class="title">Logged in your account?</div>
+            <div>
+              To Book this slot You have to logged in your account. If you don't
+              have any account please register.
+              <div class="actions">
+                <button>
+                  <a href="/login.html" target="_blank">Login</a>
+                </button>
+                <button>
+                  <a href="/register.html" target="_blank">Register</a>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="cross">
+            <button onclick="closeModal(this.parentElement.parentElement)">
+              X
+            </button>
+          </div>
+        </div>
+
+        <div id="booking-modal" class="hidden">
+          <div class="confirmation modal-content">
+            <div class="title">Confirm your Booking?</div>
+            <div id="booking-status"></div>
+            <div>
+              <span>You want to book your slot at </span>
+              <span id="booking-time"></span>
+              <span id="booking-date"></span>
+            </div>
+            <div class="actions">
+              <button onclick="confirmBooking()">
+                Confirm
+              </button>
+              <button
+                onclick="closeModal(this.parentElement.parentElement.parentElement)"
+              >
+                No
+              </button>
+            </div>
+          </div>
+          <div class="cross">
+            <button onclick="closeModal(this.parentElement.parentElement)">
+              X
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="footer"></div>
   </body>

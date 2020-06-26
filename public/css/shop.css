@@ -12,3 +12,101 @@
   color: red;
   opacity: 0.5;
 }
+.occupied + span {
+  cursor: default;
+  pointer-events: none;
+}
+
+.modals {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(3px);
+}
+
+.modals > div {
+  width: 30%;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+  top: 20vh;
+  border: 2px solid #0c4da2;
+  background-color: #fff;
+  box-shadow: 0 0 50px #333;
+}
+@media (max-width: 420px) {
+  .modals > div {
+    width: 90%;
+  }
+}
+.title {
+  font-size: 24px;
+  margin: 0 auto;
+  font-weight: 600;
+  padding: 8px;
+  text-align: center;
+}
+.modal-content {
+  padding: 16px 28px;
+}
+.actions {
+  margin-top: 4%;
+  display: flex;
+  justify-content: space-around;
+}
+.actions button {
+  width: 25%;
+  margin: 0 1%;
+  border-radius: 4px;
+  transition: 0.4s;
+}
+.actions button a {
+  color: #fff;
+  text-decoration: none;
+}
+.actions button:hover {
+  background: #083f88;
+  transform: scale(1.1);
+  transition: 0.4s;
+}
+.cross {
+  position: absolute;
+  top: -10%;
+  right: -3.5%;
+  width: 40px;
+  height: 40px;
+}
+.cross button {
+  width: 100%;
+  background-color: #f00;
+  color: #fff;
+  font-weight: 700;
+  font-size: 24px;
+  border: 2px solid #f00;
+  padding: 4px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.cross button:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+#booking-status {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 2%;
+}
+.success {
+  color: green;
+}
+.error {
+  color: red;
+}
+.hidden {
+  display: none;
+  height: 0;
+}
