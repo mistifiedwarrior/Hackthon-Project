@@ -1,6 +1,5 @@
 const sinon = require('sinon');
 const moment = require('moment');
-// const { assert } = require('chai');
 const request = require('supertest');
 const { app } = require('../src/router');
 const { Shopkeeper } = require('../src/models/shopkeeper');
@@ -9,7 +8,6 @@ const {
   customerOne,
   customerTwo,
   shopkeeperOneId,
-  // shopkeeperOne,
   setupDatabase,
   initBookings,
   cleanupDatabase,
