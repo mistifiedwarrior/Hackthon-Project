@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-const initSlots = ({ openingTime, closingTime, bookingDuration } = {}) => {
+const initSlots = ({ openingTime, closingTime, bookingDuration }) => {
   const slots = [];
   let startTime = moment(openingTime, 'HH:mm');
   const endTime = moment(closingTime, 'HH:mm');
@@ -29,18 +29,14 @@ const initBooking = async (shop, date) => {
   return initBooking;
 };
 
-const getBookings = async (shop, date) => {
+const getBookings = async (shop, dateToFind) => {
   const { allBookings } = shop;
-  const dateToFind = moment(date).format('YYYY-MM-DD');
+  const date = moment(dateToFind).format('YYYY-MM-DD');
   if (!isValidBooking(shop.timing.bookBefore, date)) {
     return { date: dateToFind, bookings: [] };
   }
-  const bookings = allBookings.filter((booking) => booking.date === dateToFind);
-  if (!bookings.length) {
-    const booking = await initBooking(shop, dateToFind);
-    bookings.push(booking);
-  }
-  return bookings[0];
+  const [booking] = allBookings.filter((booking) => booking.date === date);
+  return await (booking || initBooking(shop, date));
 };
 
 module.exports = { getBookings };

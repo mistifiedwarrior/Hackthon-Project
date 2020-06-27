@@ -155,21 +155,4 @@ describe('Customer', () => {
       sinon.restore();
     });
   });
-
-  describe('Book Slot', () => {
-    beforeEach(setupDatabase);
-    afterEach(cleanupDatabase);
-
-    it('should give 500 error if server is crashes', async () => {
-      sinon.replace(Shopkeeper, 'findById', () => {
-        throw new Error();
-      });
-      await request(app)
-        .post('/customer/bookSlot')
-        .send({ shopId: '123' })
-        .set('Cookie', `customer=${customerOne.tokens[0].token}`)
-        .expect(500);
-      sinon.restore();
-    });
-  });
 });

@@ -1,7 +1,9 @@
+const moment = require('moment');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const { Customer } = require('../../src/models/customer');
 const { Shopkeeper } = require('../../src/models/shopkeeper');
+const { getBookings } = require('../../src/handlers/initBookings');
 
 const customerOneId = new mongoose.Types.ObjectId();
 const customerOne = {
@@ -47,8 +49,10 @@ const shopkeeperOne = {
     openingTime: '09:00',
     closingTime: '22:00',
     bookingDuration: 30,
-    bookBefore: 4,
+    slots: 2,
+    bookBefore: 5,
   },
+  allBookings: {},
 };
 
 const shopkeeperTwoId = new mongoose.Types.ObjectId();
@@ -69,6 +73,11 @@ const setupDatabase = async function () {
   await new Shopkeeper(shopkeeperTwo).save();
 };
 
+const initBookings = async function () {
+  const shop = await Shopkeeper.findOne(shopkeeperOneId);
+  await getBookings(shop, moment().format('YYYY-MM-DD'));
+};
+
 const cleanupDatabase = async function () {
   await Customer.deleteMany({});
   await Shopkeeper.deleteMany({});
@@ -85,5 +94,6 @@ module.exports = {
   shopkeeperTwo,
   notExistToken: jwt.sign({}, process.env.SECRET_CODE, { expiresIn: 0 }),
   setupDatabase,
+  initBookings,
   cleanupDatabase,
 };

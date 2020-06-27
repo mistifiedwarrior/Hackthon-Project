@@ -65,14 +65,20 @@ const getBookingDetails = () => {
   return { date, time, shopId };
 };
 
+const showBookingResponse = function ({ error }) {
+  const $bookingStatus = getElement('#booking-status');
+  $bookingStatus.innerText = error || 'Successfully booked slot.';
+  $bookingStatus.classList.add(error ? 'error' : 'success');
+  main();
+};
+
 const confirmBooking = async () => {
   try {
     const bookingDetails = getBookingDetails();
     const res = await fetch('/customer/bookSlot', getOptions(bookingDetails));
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    getElement('#booking-status').innerText = 'Successfully booked Slot';
-    getElement('#booking-status').classList.add('success');
-    setTimeout(main, 1000);
+    const data = await res.json();
+    showBookingResponse(data);
   } catch (error) {
     getElement('#booking-status').innerText = 'Something went wrong!';
     getElement('#booking-status').classList.add('error');

@@ -63,9 +63,9 @@ const bookSlot = async (req, res) => {
     const { date, time, shopId } = req.body;
     const customerId = req.customer._id;
     const shop = await Shopkeeper.findById(shopId);
-    updateBooking(shop.allBookings, date, time, customerId);
+    const result = updateBooking(shop, date, time, customerId);
     await shop.save();
-    res.send({ status: true });
+    res.send(result);
   } catch (error) {
     res.status(500).end();
   }
