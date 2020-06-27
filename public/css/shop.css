@@ -94,7 +94,8 @@
   transform: scale(1.1);
   transition: 0.2s;
 }
-#booking-status {
+#booking-status,
+#cancel-booked-status {
   text-align: center;
   font-size: 18px;
   font-weight: 600;

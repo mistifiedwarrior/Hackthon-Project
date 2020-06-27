@@ -54,4 +54,27 @@ const updateBooking = function (shop, date, time, customerId) {
   return { status: true };
 };
 
-module.exports = { getOrQuery, filterDetailsToServe, updateBooking };
+const removeMyBooking = function (bookedBy, customerId) {
+  for (let time = 0; time < bookedBy.length; time++) {
+    const bookedStatus = bookedBy.shift();
+    if (bookedStatus.customerId.equals(customerId)) {
+      return;
+    }
+    bookedBy.push(bookedStatus);
+  }
+};
+
+const cancelBooking = function (shop, date, time, customerId) {
+  const bookings = findBookings(shop.allBookings, date);
+  const { bookedBy } = bookings.find((booking) => booking.time === time);
+  if (!isAlreadyBookedByMe(bookedBy, customerId)) {
+    throw new Error();
+  }
+  removeMyBooking(bookedBy, customerId);
+};
+module.exports = {
+  getOrQuery,
+  filterDetailsToServe,
+  updateBooking,
+  cancelBooking,
+};

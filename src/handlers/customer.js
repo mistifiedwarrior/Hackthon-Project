@@ -6,6 +6,7 @@ const {
   getOrQuery,
   filterDetailsToServe,
   updateBooking,
+  cancelBooking,
 } = require('./utilCustomer');
 
 const registerCustomer = async (req, res) => {
@@ -64,8 +65,21 @@ const bookSlot = async (req, res) => {
     const customerId = req.customer._id;
     const shop = await Shopkeeper.findById(shopId);
     const result = updateBooking(shop, date, time, customerId);
-    await shop.save();
+    result.error || shop.save();
     res.send(result);
+  } catch (error) {
+    res.status(500).end();
+  }
+};
+
+const cancelSlot = async (req, res) => {
+  try {
+    const { date, time, shopId } = req.body;
+    const customerId = req.customer._id;
+    const shop = await Shopkeeper.findById(shopId);
+    cancelBooking(shop, date, time, customerId);
+    await shop.save();
+    res.send({ status: true });
   } catch (error) {
     res.status(500).end();
   }
@@ -77,4 +91,5 @@ module.exports = {
   serveAllShops,
   serveShop,
   bookSlot,
+  cancelSlot,
 };

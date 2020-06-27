@@ -43,10 +43,25 @@ const renderBookSlotModal = (time) => {
   getElement('#booking-date').date = date;
 };
 
+const renderCancelModal = (time) => {
+  getElement('.modals').classList.remove('hidden');
+  getElement('.modals #cancel-booked-modal').classList.remove('hidden');
+  getElement('#cancel-booked-status').classList.remove('error', 'success');
+  getElement('#cancel-booked-status').innerText = '';
+  getElement('#cancel-booked-time').innerText = time;
+  const date = moment(getElement('#date').value, 'YYYY-MM-DD');
+  const $cancelBookedDate = getElement('#cancel-booked-date');
+  $cancelBookedDate.innerText = `on ${date.format('MMM DD, YYYY')}.`;
+  $cancelBookedDate.date = date;
+};
+
 const listenerOnBookingButton = (isLoggedIn) => {
   getAllElement('.booking-status span').forEach((button) => {
     button.addEventListener('click', () => {
       if (!isLoggedIn) return renderLoggedInModal();
+      const classes = button.parentElement.firstElementChild.classList;
+      if (classes.value.includes('occupied-by-me'))
+        return renderCancelModal(button.innerText);
       renderBookSlotModal(button.innerText);
     });
   });
@@ -57,31 +72,44 @@ const closeModal = (modalName) => {
   modalName.parentElement.classList.add('hidden');
 };
 
-const getBookingDetails = () => {
-  const date = getElement('#booking-date').date._i;
-  const timeIn12Hours = getElement('#booking-time').innerText;
+const getDetails = (optionOf) => {
+  const date = getElement(`#${optionOf}-date`).date._i;
+  const timeIn12Hours = getElement(`#${optionOf}-time`).innerText;
   const time = moment(timeIn12Hours, 'hh:mm a').format('HH:mm');
   const shopId = getElement('.bookings').id;
   return { date, time, shopId };
 };
 
-const showBookingResponse = function ({ error }) {
-  const $bookingStatus = getElement('#booking-status');
-  $bookingStatus.innerText = error || 'Successfully booked slot.';
-  $bookingStatus.classList.add(error ? 'error' : 'success');
+const showResponse = function ({ error }, optionOf, response) {
+  const $Status = getElement(`#${optionOf}-status`);
+  $Status.innerText = error || response;
+  $Status.classList.add(error ? 'error' : 'success');
   main();
 };
 
 const confirmBooking = async () => {
   try {
-    const bookingDetails = getBookingDetails();
+    const bookingDetails = getDetails('booking');
     const res = await fetch('/customer/bookSlot', getOptions(bookingDetails));
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
-    showBookingResponse(data);
+    showResponse(data, 'booking', 'Successfully booked slot.');
   } catch (error) {
     getElement('#booking-status').innerText = 'Something went wrong!';
     getElement('#booking-status').classList.add('error');
+  }
+};
+
+const cancelBookedSlot = async () => {
+  try {
+    const cancelDetails = getDetails('cancel-booked');
+    const res = await fetch('/customer/cancelSlot', getOptions(cancelDetails));
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    const data = await res.json();
+    showResponse(data, 'cancel-booked', 'Successfully canceled your slot.');
+  } catch (error) {
+    getElement('#cancel-booked-status').innerText = 'Something went wrong!';
+    getElement('#cancel-booked-status').classList.add('error');
   }
 };
 

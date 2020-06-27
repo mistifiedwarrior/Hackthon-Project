@@ -78,4 +78,51 @@ describe('Customer Booking', () => {
       sinon.restore();
     });
   });
+
+  describe('Cancel Booked Slot', () => {
+    beforeEach(async () => {
+      await setupDatabase();
+      await initBookings();
+    });
+    afterEach(cleanupDatabase);
+
+    it('should cancel my booked slot', async () => {
+      const date = moment().format('YYYY-MM-DD');
+      await request(app)
+        .post('/customer/bookSlot')
+        .set('Cookie', `customer=${customerTwo.tokens[0].token}`)
+        .send({ shopId: shopkeeperOneId, date, time: '09:00' });
+      await request(app)
+        .post('/customer/bookSlot')
+        .set('Cookie', `customer=${customerOne.tokens[0].token}`)
+        .send({ shopId: shopkeeperOneId, date, time: '09:00' });
+
+      await request(app)
+        .post('/customer/cancelSlot')
+        .set('Cookie', `customer=${customerOne.tokens[0].token}`)
+        .send({ shopId: shopkeeperOneId, date, time: '09:00' })
+        .expect(200);
+    });
+
+    it('should give 500 error if i have not booked slot ', async () => {
+      const date = moment().format('YYYY-MM-DD');
+      await request(app)
+        .post('/customer/cancelSlot')
+        .set('Cookie', `customer=${customerOne.tokens[0].token}`)
+        .send({ shopId: shopkeeperOneId, date, time: '09:00' })
+        .expect(500);
+    });
+
+    it('should give 500 error if server is crashes', async () => {
+      sinon.replace(Shopkeeper, 'findById', () => {
+        throw new Error();
+      });
+      await request(app)
+        .post('/customer/cancelSlot')
+        .send({ shopId: '123' })
+        .set('Cookie', `customer=${customerOne.tokens[0].token}`)
+        .expect(500);
+      sinon.restore();
+    });
+  });
 });

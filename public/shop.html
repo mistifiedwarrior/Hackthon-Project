@@ -83,6 +83,35 @@
             </button>
           </div>
         </div>
+
+        <div id="cancel-booked-modal" class="hidden">
+          <div class="confirmation modal-content">
+            <div class="title error">
+              Do you want to cancel your booked slot?
+            </div>
+            <div id="cancel-booked-status"></div>
+            <div>
+              <span>You want to cancel your slot at </span>
+              <span id="cancel-booked-time"></span>
+              <span id="cancel-booked-date"></span>
+            </div>
+            <div class="actions">
+              <button onclick="cancelBookedSlot()">
+                Yes
+              </button>
+              <button
+                onclick="closeModal(this.parentElement.parentElement.parentElement)"
+              >
+                No
+              </button>
+            </div>
+          </div>
+          <div class="cross">
+            <button onclick="closeModal(this.parentElement.parentElement)">
+              X
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="footer"></div>
