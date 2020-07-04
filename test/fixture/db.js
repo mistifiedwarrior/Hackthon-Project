@@ -71,9 +71,6 @@ const setupDatabase = async function () {
   await new Customer(customerTwo).save();
   await new Shopkeeper(shopkeeperOne).save();
   await new Shopkeeper(shopkeeperTwo).save();
-};
-
-const initBookings = async function () {
   const shop = await Shopkeeper.findOne(shopkeeperOneId);
   await getBookings(shop, moment().format('YYYY-MM-DD'));
 };
@@ -94,6 +91,5 @@ module.exports = {
   shopkeeperTwo,
   notExistToken: jwt.sign({}, process.env.SECRET_CODE, { expiresIn: 0 }),
   setupDatabase,
-  initBookings,
   cleanupDatabase,
 };

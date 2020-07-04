@@ -36,7 +36,7 @@ const shopkeeperSchema = new mongoose.Schema({
           time: { type: String },
           bookedBy: [
             {
-              customerId: {
+              customer: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Customer',
               },
@@ -78,6 +78,12 @@ shopkeeperSchema.statics.findByCredentials = async function (email, password) {
   }
   return shopkeeper;
 };
+
+shopkeeperSchema.virtual('customers', {
+  ref: 'Customer',
+  localField: '_id',
+  foreignField: 'allBookings.bookings.bookedBy.customer',
+});
 
 const Shopkeeper = mongoose.model('Shopkeeper', shopkeeperSchema);
 module.exports = { Shopkeeper };

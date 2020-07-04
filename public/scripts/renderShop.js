@@ -19,7 +19,7 @@ const showAddress2 = (address) => {
 
 const isThisMySlot = (bookedList) => {
   return bookedList.some((bookedItem) => {
-    return bookedItem.customerId === getElement('#profile').myId;
+    return bookedItem.customer === getElement('#profile').myId;
   });
 };
 

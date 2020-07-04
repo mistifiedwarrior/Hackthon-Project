@@ -1,0 +1,160 @@
+.bookings-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 8px;
+  background: #eee;
+  border-bottom: 1px solid #aaa;
+}
+@media (max-width: 420px) {
+  .bookings-header {
+    flex-direction: column;
+    padding: 8px 2px;
+  }
+  .bookings-header > div {
+    margin: 2px 0;
+  }
+}
+.shop-name {
+  font-size: 22px;
+  text-shadow: 1px 1px 1px #ccc;
+}
+.date input {
+  outline: none;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+@media (max-width: 420px) {
+  .date {
+    font-size: 14px;
+    text-align: center;
+  }
+  .date input {
+    min-width: 60%;
+    font-size: 14px;
+  }
+}
+
+/* shop  */
+.no-bookings {
+  font-size: 24px;
+  text-align: center;
+  max-height: 50vh;
+  padding: 20vh;
+  opacity: 0.5;
+  color: red;
+}
+.shop .date {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 12px;
+  font-size: 18px;
+}
+
+.bookings {
+  padding: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #ccc;
+}
+.booking-status {
+  margin: 0 auto;
+  display: flex;
+  margin: 4px;
+  border: 1px solid #333;
+  position: relative;
+  min-width: 120px;
+}
+.booking-status > span {
+  line-height: 36px;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  font-family: sans-serif;
+  font-weight: 300;
+  cursor: pointer;
+}
+.booking-status > div {
+  pointer-events: none;
+  width: 24px;
+  height: 36px;
+}
+.booking-status > .available {
+  opacity: 0.4;
+  background: green;
+}
+.booking-status > .occupied {
+  background: red;
+  opacity: 0.8;
+}
+.slots-1 {
+  min-width: 120px;
+}
+.slots-2 {
+  min-width: 60px;
+}
+.slots-3 {
+  min-width: 40px;
+}
+.slots-4 {
+  min-width: 30px;
+}
+@media (max-width: 420px) {
+  .shop {
+    padding: 2px;
+  }
+  .booking-status > span {
+    line-height: 11px;
+    font-size: 11px;
+    font-weight: 200;
+  }
+  .booking-status > div {
+    width: 10px;
+    height: 12px;
+  }
+  .booking-status {
+    min-width: 48px;
+  }
+  .slots-1 {
+    min-width: 48px;
+  }
+  .slots-2 {
+    min-width: 24px;
+  }
+  .slots-3 {
+    min-width: 16px;
+  }
+  .slots-4 {
+    min-width: 12px;
+  }
+}
+.modal {
+  position: absolute;
+  border: 1px solid blue;
+  width: 400px;
+}
+.modal-header {
+  text-align: center;
+  border-bottom: 1px solid #aaa;
+  background: #eee;
+  font-size: 20px;
+  padding: 4px;
+}
+.customers {
+  padding: 4px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+.slot,
+.name {
+  margin: 0 auto;
+  line-height: 32px;
+  font-size: 18px;
+}
+.slot {
+  border: 1px solid #ccc;
+  width: 32px;
+  border-radius: 50%;
+  height: 32px;
+}

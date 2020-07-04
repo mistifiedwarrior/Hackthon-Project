@@ -27,7 +27,8 @@ const loginShopkeeper = async (req, res) => {
 };
 
 const serverMyProfile = async (req, res) => {
-  res.send({ email: req.shopkeeper.email, name: req.shopkeeper.name });
+  const { email, name, address, timing } = req.shopkeeper;
+  res.send({ email, name, address, timing });
 };
 
 const updateDetails = async (req, res) => {
@@ -43,9 +44,26 @@ const updateDetails = async (req, res) => {
   }
 };
 
+const serveBookedCustomers = async (req, res) => {
+  try {
+    const date = req.query.date;
+    const shop = await req.shopkeeper
+      .populate('allBookings.bookings.bookedBy.customer', ['name'])
+      .execPopulate();
+    const booking = shop.allBookings.find((booking) => booking.date === date);
+    if (!booking) {
+      throw new Error();
+    }
+    res.send(booking);
+  } catch (error) {
+    res.status(500).end();
+  }
+};
+
 module.exports = {
   registerShopkeeper,
   loginShopkeeper,
   serverMyProfile,
   updateDetails,
+  serveBookedCustomers,
 };

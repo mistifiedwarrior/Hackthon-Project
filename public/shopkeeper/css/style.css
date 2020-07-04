@@ -62,7 +62,9 @@ a {
 .fa-bars {
   text-align: left;
 }
-
+.main-content {
+  margin-top: 32px;
+}
 .content {
   margin: 1%;
   margin-top: 40px;

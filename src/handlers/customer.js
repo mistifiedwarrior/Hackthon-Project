@@ -39,7 +39,8 @@ const serveAllShops = async (req, res) => {
   try {
     const { search, date } = req.body;
     const query = getOrQuery(search);
-    const shops = await Shopkeeper.find(query);
+    const select = ['allBookings', 'address', 'timing'];
+    const shops = await Shopkeeper.find(query).select(select);
     const shopsToServe = await filterDetailsToServe(shops, date);
     res.send(shopsToServe);
   } catch (error) {
@@ -62,9 +63,9 @@ const serveShop = async (req, res) => {
 const bookSlot = async (req, res) => {
   try {
     const { date, time, shopId } = req.body;
-    const customerId = req.customer._id;
+    const customer = req.customer._id;
     const shop = await Shopkeeper.findById(shopId);
-    const result = updateBooking(shop, date, time, customerId);
+    const result = updateBooking(shop, date, time, customer);
     result.error || shop.save();
     res.send(result);
   } catch (error) {

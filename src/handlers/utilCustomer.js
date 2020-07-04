@@ -16,8 +16,8 @@ const getOrQuery = ($regex) => {
 
 const filterDetails = (date) => {
   return async (shop) => {
-    const { _id, address, allBookings, timing } = shop;
-    const [booking] = allBookings.filter((booking) => booking.date === date);
+    const { allBookings, _id, address, timing } = shop;
+    const booking = allBookings.find((booking) => booking.date === date);
     const bookings = await (booking || getBookings(shop, date));
     return { bookings, _id, address, timing };
   };
@@ -30,9 +30,9 @@ const filterDetailsToServe = async (shops, date) => {
   });
 };
 
-const isAlreadyBookedByMe = (bookedBy, customerId) => {
+const isAlreadyBookedByMe = (bookedBy, customer) => {
   return bookedBy.find((bookedStatus) => {
-    return bookedStatus.customerId.equals(customerId);
+    return bookedStatus.customer.equals(customer);
   });
 };
 
@@ -41,37 +41,38 @@ const findBookings = (allBookings, date) => {
   return result.bookings;
 };
 
-const updateBooking = function (shop, date, time, customerId) {
+const updateBooking = function (shop, date, time, customer) {
   const bookings = findBookings(shop.allBookings, date);
   const { bookedBy } = bookings.find((booking) => booking.time === time);
   if (bookedBy.length === shop.timing.slots) {
     return { error: 'All slots already booked.' };
   }
-  if (isAlreadyBookedByMe(bookedBy, customerId)) {
+  if (isAlreadyBookedByMe(bookedBy, customer)) {
     return { error: 'Already booked this slot.' };
   }
-  bookedBy.push({ customerId });
+  bookedBy.push({ customer });
   return { status: true };
 };
 
-const removeMyBooking = function (bookedBy, customerId) {
+const removeMyBooking = function (bookedBy, customer) {
   for (let time = 0; time < bookedBy.length; time++) {
     const bookedStatus = bookedBy.shift();
-    if (bookedStatus.customerId.equals(customerId)) {
+    if (bookedStatus.customer.equals(customer)) {
       return;
     }
     bookedBy.push(bookedStatus);
   }
 };
 
-const cancelBooking = function (shop, date, time, customerId) {
+const cancelBooking = function (shop, date, time, customer) {
   const bookings = findBookings(shop.allBookings, date);
   const { bookedBy } = bookings.find((booking) => booking.time === time);
-  if (!isAlreadyBookedByMe(bookedBy, customerId)) {
+  if (!isAlreadyBookedByMe(bookedBy, customer)) {
     throw new Error();
   }
-  removeMyBooking(bookedBy, customerId);
+  removeMyBooking(bookedBy, customer);
 };
+
 module.exports = {
   getOrQuery,
   filterDetailsToServe,

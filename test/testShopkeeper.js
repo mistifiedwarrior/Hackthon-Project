@@ -84,11 +84,12 @@ describe('shopkeeper', () => {
     afterEach(cleanupDatabase);
 
     it('Should serve my profile', async () => {
+      const { name, email, address, timing } = shopkeeperOne;
       await request(app)
         .get('/shopkeeper/myProfile')
         .set('Cookie', `shopkeeper=${shopkeeperOne.tokens[0].token}`)
         .expect(200)
-        .expect({ name: 'shopkeeper1', email: 'abc@xyz.com' });
+        .expect({ name, email, address, timing });
     });
 
     it('should not auth if token is not right', async () => {

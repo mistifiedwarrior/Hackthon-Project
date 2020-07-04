@@ -28,6 +28,7 @@ const loadProfile = async () => {
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
     renderShopkeeperDetails(data);
+    return data;
   } catch (error) {
     console.error(error);
   }
@@ -47,7 +48,7 @@ const loadSideNavbar = async function () {
     const res = await fetch('./includes/sideNavbar.html');
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     getElement('#side-navbar').innerHTML = await res.text();
-    await loadProfile();
+    return await loadProfile();
   } catch (error) {
     console.error(error);
   }

@@ -9,16 +9,12 @@ const {
   customerTwo,
   shopkeeperOneId,
   setupDatabase,
-  initBookings,
   cleanupDatabase,
 } = require('./fixture/db');
 
 describe('Customer Booking', () => {
   describe('Book Slot', () => {
-    beforeEach(async () => {
-      await setupDatabase();
-      await initBookings();
-    });
+    beforeEach(setupDatabase);
     afterEach(cleanupDatabase);
 
     it('should book my slot', async () => {
@@ -80,10 +76,7 @@ describe('Customer Booking', () => {
   });
 
   describe('Cancel Booked Slot', () => {
-    beforeEach(async () => {
-      await setupDatabase();
-      await initBookings();
-    });
+    beforeEach(setupDatabase);
     afterEach(cleanupDatabase);
 
     it('should cancel my booked slot', async () => {
