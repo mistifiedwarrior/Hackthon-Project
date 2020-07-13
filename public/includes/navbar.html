@@ -14,7 +14,13 @@
       </li>
       <li><a href="/">Home</a></li>
       <li><a href="/shops.html">Shops</a></li>
-      <li id="profile"><a href="login.html">Login</a></li>
+      <li class="profile">
+        <a href="login.html" id="profile">Login</a>
+        <div class="profile-navbar hidden">
+          <a href="/bookings.html">Bookings</a>
+          <a onclick="logout()">Logout</a>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
@@ -148,13 +154,45 @@
       border: 0;
     }
   }
-  #profile {
+  .profile {
     position: absolute;
-    right: 10px;
+    float: right;
+    padding-right: 20px;
   }
   @media (max-width: 420px) {
-    #profile {
+    .profile {
       position: unset;
     }
+  }
+
+  .profile-navbar {
+    position: absolute;
+    margin-top: 50px;
+    margin-right: 20px;
+    border: 1px solid #333;
+    background: #eee;
+  }
+  .profile-navbar a {
+    border-bottom: 1px solid #333;
+    text-decoration: none;
+    cursor: pointer;
+    color: #0c4da2;
+    padding: 8px;
+    font-size: 18px;
+    height: 28px;
+    line-height: 28px;
+    width: 90%;
+    transition: 0.5s;
+  }
+  .profile-navbar a:hover {
+    color: #fff;
+    opacity: 0.9;
+    background-color: #0c4da2;
+  }
+  .hidden {
+    display: none;
+  }
+  .profile:hover > .profile-navbar {
+    display: block;
   }
 </style>

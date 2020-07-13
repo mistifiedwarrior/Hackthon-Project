@@ -28,8 +28,10 @@ const renderProfile = async () => {
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const myData = await res.json();
     const $profile = getElement('#profile');
-    $profile.innerHTML = `<a href="profile/${myData._id}">${myData.name}</a>`;
+    $profile.innerText = myData.name;
+    $profile.href = '';
     $profile.myId = myData._id;
+    $profile.classList.add('logged-in');
     return myData;
   } catch (error) {
     // console.error(error);
