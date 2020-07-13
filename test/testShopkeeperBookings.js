@@ -33,5 +33,13 @@ describe('shopkeeper bookings', () => {
         .set('Cookie', `shopkeeper=${shopkeeperOne.tokens[0].token}`)
         .expect(200);
     });
+
+    it('should give error if no booking initialize', async () => {
+      const date = moment().add(7, 'days').format('YYYY-MM-DD');
+      await request(app)
+        .get(`/shopkeeper/bookedCustomers?date=${date}`)
+        .set('Cookie', `shopkeeper=${shopkeeperOne.tokens[0].token}`)
+        .expect(500);
+    });
   });
 });

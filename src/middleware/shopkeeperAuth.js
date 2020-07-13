@@ -10,7 +10,8 @@ const auth = async function (req, res, next) {
     req.shopkeeper = shopkeeper;
     next();
   } catch (error) {
-    res.redirect('./login.html');
+    const unauthorizedCode = 401;
+    res.status(unauthorizedCode).redirect('/shopkeeper/login.html');
   }
 };
 

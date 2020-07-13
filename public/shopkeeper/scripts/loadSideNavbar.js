@@ -25,12 +25,12 @@ const renderShopkeeperDetails = (shopkeeper) => {
 const loadProfile = async () => {
   try {
     const res = await fetch('/shopkeeper/myProfile');
-    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    if (!res.ok) throw new Error(res);
     const data = await res.json();
     renderShopkeeperDetails(data);
     return data;
   } catch (error) {
-    console.error(error);
+    window.location.href = '/shopkeeper/login.html';
   }
 };
 

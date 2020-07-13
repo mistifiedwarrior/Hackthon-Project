@@ -12,7 +12,7 @@
     padding: 8px 2px;
   }
   .bookings-header > div {
-    margin: 2px 0;
+    margin: 2px auto;
   }
 }
 .shop-name {
@@ -31,7 +31,8 @@
   }
   .date input {
     min-width: 60%;
-    font-size: 14px;
+    font-size: 13px;
+    padding: 0;
   }
 }
 
@@ -44,13 +45,12 @@
   opacity: 0.5;
   color: red;
 }
-.shop .date {
-  display: flex;
-  justify-content: space-between;
-  padding-right: 12px;
-  font-size: 18px;
+@media (max-width: 420px) {
+  .no-bookings {
+    font-size: 18px;
+    padding: 5vh;
+  }
 }
-
 .bookings {
   padding: 1%;
   display: flex;
@@ -79,6 +79,25 @@
   width: 24px;
   height: 36px;
 }
+@media (max-width: 420px) {
+  .bookings {
+    padding: 2px;
+  }
+  .booking-status {
+    margin: 1px;
+    min-width: 72px;
+  }
+  .booking-status > span {
+    line-height: 18px;
+    font-size: 14px;
+    font-weight: 100;
+  }
+  .booking-status > div {
+    width: 15px;
+    height: 18px;
+  }
+}
+
 .booking-status > .available {
   opacity: 0.4;
   background: green;
@@ -100,38 +119,30 @@
   min-width: 30px;
 }
 @media (max-width: 420px) {
-  .shop {
-    padding: 2px;
-  }
-  .booking-status > span {
-    line-height: 11px;
-    font-size: 11px;
-    font-weight: 200;
-  }
-  .booking-status > div {
-    width: 10px;
-    height: 12px;
-  }
   .booking-status {
-    min-width: 48px;
+    min-width: 72px;
   }
   .slots-1 {
-    min-width: 48px;
+    min-width: 72px;
   }
   .slots-2 {
-    min-width: 24px;
+    min-width: 36px;
   }
   .slots-3 {
-    min-width: 16px;
+    min-width: 24px;
   }
   .slots-4 {
-    min-width: 12px;
+    min-width: 18px;
   }
+}
+.modal-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 .modal {
   position: absolute;
   border: 1px solid blue;
-  width: 400px;
 }
 .modal-header {
   text-align: center;
@@ -140,11 +151,26 @@
   font-size: 20px;
   padding: 4px;
 }
+@media (max-width: 420px) {
+  .modal-container {
+    margin: 8px;
+  }
+  .modal {
+    margin-right: 8px;
+  }
+  .modal-header {
+    font-size: 16px;
+    padding: 2px;
+  }
+}
 .customers {
   padding: 4px;
   display: flex;
   justify-content: space-around;
   text-align: center;
+}
+.customers > div {
+  margin: 8px;
 }
 .slot,
 .name {
@@ -157,4 +183,22 @@
   width: 32px;
   border-radius: 50%;
   height: 32px;
+}
+
+@media (max-width: 420px) {
+  .customers {
+    padding: 2px;
+  }
+  .customers > div {
+    margin: 2px;
+  }
+  .slot,
+  .name {
+    line-height: 24px;
+    font-size: 14px;
+  }
+  .slot {
+    width: 24px;
+    height: 24px;
+  }
 }
